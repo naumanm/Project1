@@ -1,0 +1,91 @@
+html { 
+  height: 100% 
+}
+
+body { 
+  height: 100%; 
+  margin: 0; 
+  padding: 0;
+}
+
+h2 {
+  display: inline-block;
+}
+
+h3 {
+	font-family: Arial;
+	color: white;
+	background: darkgray;
+}
+.abs {
+	position: absolute;
+}
+
+.alignRight {
+	text-align: right;
+}
+
+.header {
+  margin: 20px;
+  height: 75px;
+  width: 95%;
+  background: gray;
+  border-radius: 5px;
+}
+
+.row {
+  margin: 20px;
+  height: 460px;
+  width: 95%;
+  background: gray;
+  border-radius: 5px;
+}
+
+.content {
+  display: inline-block;
+  background-color: yellow;
+  height: 415px;
+  width: 200px;
+  z-index: 100;
+  margin: 20px;
+  border-radius: 5px;
+}
+
+.footer {
+  margin: 20px;
+  height: 60px;
+  width: 95%;
+  background: gray;
+  border-radius: 5px;
+}
+.title {
+  display: inline-block;
+  height: 30px;
+  width: 50;
+}
+
+
+.myButton {
+  display: inline-block;
+  height: 15px;
+  width: 30px;
+  background-color: yellow;
+  z-index: 100;
+  margin-top: 5px;
+  margin-left: 5px;
+  margin-right: 5px;
+  border-bottom: black;
+  border-right: black;
+  border-width: 5px;
+  border-radius: 5px;
+  vertical-align: middle;
+}
+
+#map-canvas {
+  margin: 20px;
+  border: black 4px solid;
+  height: 410px;
+  width: 420px;
+  border-radius: 5px;
+
+}
