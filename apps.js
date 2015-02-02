@@ -39,24 +39,15 @@ $(document).ready(function() {
 
   function issPositionLoop () {
       $.getJSON('http://api.open-notify.org/iss-now.json?callback=?', function(data) {
-        //var lat = data['iss_position']['latitude'];
-        //var lon = data['iss_position']['longitude'];
-
-        console.log(data);
-
-		var items = [];
 
         $.each( data, function( key, val ) {
-          items.push( "<li id='" + key + "'>" + val + "</li>" );
-          // console.log(key + " " +val);
-          // console.log("<li id='" + key + "'>");
+          var myLong = data.iss_position.longitude;
+          var myLat = data.iss_position.latitude;
+
+          console.log(myLong);
+          console.log(myLat);
+
         });
-
-        console.log("test");
-        console.log(items);
-
-
-        return data;
     });
     
     // this should work and is throwing errors
