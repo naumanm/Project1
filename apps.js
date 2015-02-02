@@ -49,30 +49,21 @@ $(document).ready(function() {
   }
 
   function updateContent (latLong) {
-
-    var myLat = { lat: latLong.currentLat};
-    var myLong = { lng: latLong.currentLong};
-
-    console.log(myLat.lat);
-    console.log(myLong);
-
-    $(".latText").text(myLat.lat);
-    $(".longText").text(myLong.lng);
+    $(".latText").text(latLong.currentLat);
+    $(".longText").text(latLong.currentLong);
   }
 
   function updateMap (latLong) {
 
-    var myCenter = { lat: latLong.currentLat , lng: latLong.currentLong};
-
-    var mapOptions = { 
-      center: myCenter,
+    var map = new google.maps.Map(document.getElementById('map-canvas'), {
+      center: { lat: latLong.currentLat , lng: latLong.currentLong},
       zoom: 4,
-      // mapTypeId: 'satellite'
-    };
-    var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+      //mapTypeId: 'coordinate'
+
+    });
 
     var marker = new google.maps.Marker({
-      position: myCenter,
+      position: { lat: latLong.currentLat , lng: latLong.currentLong},
       map: map,
       title:"ISS",
       icon:'icon-iss3.png'
