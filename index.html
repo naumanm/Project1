@@ -14,9 +14,9 @@
   <!-- header -->
   <div class="header">
     <div class="abs">
-      <h1>ISS Locator</h1>
+      <h1>International Space Station Locator</h1>
 
-      <!--
+      <!-- this needs local storage and some control for buttons to stop the loop
       <h2>Enter City or Location: </h2>
       <form action="javascript: void(0)">
         <label for="gitAPI"></label>
@@ -25,29 +25,34 @@
       </form>
       -->
 
-
     </div>
     <div class="alignRight">
       <div class="myButton rightOffset"></div>
       <div class="myButton rightOffset"></div>
-      <div class="myButton rightOffset"></div>
+      <div class="myButton rightOffset last"></div>
 	</div>
   </div>
 <!-- content -->
-  <div class="row">
+  <div class="rowBody">
     <div class="abs">
       <div id="map-canvas"></div>
     </div>
     <div class="alignRight">
       <div class="content rightOffset">
-            <div class="alignLeft contentText">
-              ISS Location<br>
-              Latitude:  <span class="latText">XX.XX</span><br>
-              Longitude: <span class="longText">XX.XX</span><br>
-            </div>
-        
+        <div class="alignLeft contentText">
+          <table>
+            <tr><td>International Space Station</td></tr>
+            <tr><td>Latitude:  </td><td><span class="latText">XX.XX</span></td></tr>
+            <tr><td>Longitude: </td><td><span class="longText">XX.XX</span></td></tr>
+          </table>
+        </div>    
       </div>
     </div>
+    <div class="abs">
+      <input type="checkbox" id="mapType">
+      <label for="mapType">Satellite?</label>
+    </div>
+
   </div>
 <!-- footer -->
   <div class="footer">

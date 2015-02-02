@@ -8,13 +8,18 @@ body {
   height: 100%; 
   margin: 0; 
   padding: 0;
-  font-family: Orbitron;
+  font-family: Orbitron, Arial, sans-serif;
+
 }
 
 h1, h2, h3, h4 {
   display: inline-block;
   margin-left: 40px;
   text-align: left;
+}
+
+h1{
+	margin-top: 26px;
 }
 
 h2 {
@@ -71,9 +76,9 @@ p {
   border-radius: 5px;
 }
 
-.row {
+.rowBody {
   margin: 20px;
-  height: 460px;
+  height: 480px;
   width: 95%;
   background: gray;
   border-radius: 5px;
@@ -82,7 +87,7 @@ p {
 .content {
   display: inline-block;
   background-color: white;
-  height: 415px;
+  height: 400px;
   width: 400px;
   z-index: 50;
   margin: 20px;
@@ -114,9 +119,8 @@ p {
   width: 30px;
   background-color: yellow;
   z-index: 100;
-  margin-top: 25px;
-  margin-left: 10px;
-  margin-right: 10px;
+  margin-top: 30px;
+  margin-right: 5px;
   border-bottom: black;
   border-right: black;
   border-width: 5px;
@@ -124,9 +128,19 @@ p {
   vertical-align: middle;
 }
 
+.last {
+  margin-right: 15px;
+}
+
 #getCity {
 	margin-left: 15px;
 	text-align: middle;
+}
+
+#mapType {
+	margin-left: 25px;
+	text-align: middle;
+
 }
 
 #map-canvas {

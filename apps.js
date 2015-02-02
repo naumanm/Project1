@@ -49,9 +49,13 @@ $(document).ready(function() {
   }
 
   function updateContent (latLong) {
-    $(".latText").text(latLong.currentLat);
-    $(".longText").text(latLong.currentLong);
+    $(".latText").text(latLong.currentLat.toFixed(4));
+    $(".longText").text(latLong.currentLong.toFixed(4));
   }
+
+
+var numb = 123.23454;
+numb = numb.toFixed(2);
 
   function updateMap (latLong) {
 
