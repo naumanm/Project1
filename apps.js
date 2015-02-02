@@ -54,24 +54,26 @@ $(document).ready(function() {
   }
 
   function updateMap (latLong) {
-    var myMapTypeID;
+    var userMapTypeID;
+    var userZoom = parseInt($("#mapZoom").val(), 10);
     
     if ($("#rad1")[0].checked) {
-      myMapTypeID = 'satellite';
+      userMapTypeID = 'satellite';
     } else if ($("#rad2")[0].checked) {
-      myMapTypeID = 'hybrid';
+      userMapTypeID = 'hybrid';
     } else if ($("#rad3")[0].checked) {
-      myMapTypeID = 'terrain';
+      userMapTypeID = 'terrain';
     } else if ($("#rad4")[0].checked) {
-      myMapTypeID = 'roadmap';
+      userMapTypeID = 'roadmap';
     } 
+
+    console.log($("#mapZoom").val());
 
     var map = new google.maps.Map(document.getElementById('map-canvas'), {
       center: { lat: latLong.currentLat , lng: latLong.currentLong},
-      zoom: 4,
-      mapTypeId: myMapTypeID,
-      disableDefaultUI: true
-
+      mapTypeId: userMapTypeID,
+      disableDefaultUI: true,
+      zoom: userZoom	
     });
 
     var marker = new google.maps.Marker({
