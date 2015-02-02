@@ -12,6 +12,7 @@ body {
 
 h2 {
   display: inline-block;
+  margin-left: 10px;
 }
 
 h3 {
@@ -26,6 +27,11 @@ h3 {
 .alignRight {
 	text-align: right;
 }
+
+.alignMiddle {
+	text-align: middle;
+}
+
 
 .header {
   margin: 20px;

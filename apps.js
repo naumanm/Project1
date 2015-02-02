@@ -7,12 +7,8 @@ $(document).ready(function() {
   // map object constructor
 
   function mapObject () {
-    // need to check local storage for last location
-    var mapOptions = {
-      center: { lat: 37.85 , lng: -122.6450},
-      zoom: 10
-    };
-    var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+    // // need to check local storage for last location
+    var map = new google.maps.Map(document.getElementById('map-canvas'));
   }
 
   // ---- initialize start loop ----
@@ -58,11 +54,9 @@ $(document).ready(function() {
 
     var mapOptions = {
       center: { lat: latLong.currentLat , lng: latLong.currentLong},
-      zoom: 10
+      zoom: 4
     };
     var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-
-    console.log(myMap);
 
   }
 
