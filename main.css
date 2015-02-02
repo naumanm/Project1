@@ -10,17 +10,16 @@ body {
   padding: 0;
 }
 
-h1, h2 {
+h1, h2, h3, h4 {
   display: inline-block;
   margin-left: 40px;
   font-family: Arial;
 }
 
 h3 {
-	font-family: Arial;
 	color: white;
-	background: darkgray;
 }
+
 
 form {
   display: inline-block;

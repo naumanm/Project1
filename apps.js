@@ -58,7 +58,7 @@ $(document).ready(function() {
 
     var mapOptions = { 
       center: myCenter,
-      zoom: 4
+      zoom: 2
     };
     var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
