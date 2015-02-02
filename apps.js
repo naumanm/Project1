@@ -7,14 +7,15 @@ $(document).ready(function() {
   // map object constructor
 
   // will not work locally
-  // console.log(myPostion);
+  console.log(myPostion);
 
   function mapObject () {
     // need to check local storage for last location
     var myLocation = { lat: 37.79 , lng: -122.40};
     var mapOptions = {
       center: myLocation,
-      zoom: 4
+      zoom: 4,
+      mapTypeId: 'satellite'
     };
     var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
   }
@@ -48,7 +49,15 @@ $(document).ready(function() {
   }
 
   function updateContent (latLong) {
-    console.log(latLong);  	
+
+    var myLat = { lat: latLong.currentLat};
+    var myLong = { lng: latLong.currentLong};
+
+    console.log(myLat.lat);
+    console.log(myLong);
+
+    $(".latText").text(myLat.lat);
+    $(".longText").text(myLong.lng);
   }
 
   function updateMap (latLong) {
@@ -57,7 +66,8 @@ $(document).ready(function() {
 
     var mapOptions = { 
       center: myCenter,
-      zoom: 2
+      zoom: 2,
+      mapTypeId: 'satellite'
     };
     var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
