@@ -32,7 +32,7 @@ $(document).ready(function() {
       // get ISS data and set callback
       $.getJSON('http://api.open-notify.org/iss-now.json?callback=?', function(data) {
         // iterate through the data
-        $.each( data, function( key, val ) {
+        $.each( data, function() {
           // create and return hash of lat/long
           var latLong = {
           	currentLat: data.iss_position.latitude,
