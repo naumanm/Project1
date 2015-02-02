@@ -15,18 +15,14 @@ $(document).ready(function() {
     var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
   }
 
-  // mapObject.prototype.sayHi = function () {
-  //   alert("Hello" + this.name);
-  // };
-
   // ---- initialize start loop ----
 
   function initialize() {
 
     attachEventListeners();
 
-  	// instantiate new map
-    var myMap = new mapObject ();
+//  need a function to display a loading page for the map
+//      <div id="map-canvas"></div>
 
     setInterval(issPositionLoop, 10000); 
 
@@ -36,17 +32,18 @@ $(document).ready(function() {
     google.maps.event.addDomListener(window, 'load', initialize);
   }
 
-
   function issPositionLoop () {
+      // get ISS data and set callback
       $.getJSON('http://api.open-notify.org/iss-now.json?callback=?', function(data) {
-
+        // iterate through the data
         $.each( data, function( key, val ) {
-          var myLong = data.iss_position.longitude;
-          var myLat = data.iss_position.latitude;
-
-          console.log(myLong);
-          console.log(myLat);
-
+          // create and return hash of lat/long
+          var latLong = {
+          	currentLat: data.iss_position.latitude,
+          	currentLong: data.iss_position.longitude
+          };
+          // update the map with the current lat long
+          updateMap(latLong);
         });
     });
     
@@ -54,8 +51,25 @@ $(document).ready(function() {
     // console.log(myPostion());
   }
 
+
+  function updateMap (latLong) {
+
+    var myMap = new mapObject ();
+
+    var mapOptions = {
+      center: { lat: latLong.currentLat , lng: latLong.currentLong},
+      zoom: 10
+    };
+    var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+    console.log(myMap);
+
+  }
+
+
   function myPostion () {
-  
+  // TODO: this is not working!!!
+
     var options = {
       enableHighAccuracy: true,
       timeout: 5000,
