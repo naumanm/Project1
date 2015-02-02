@@ -132,15 +132,15 @@ p {
   margin-right: 15px;
 }
 
+#rad1 {
+  margin-left: 25px;
+  margin-bottom: 20px;
+  text-align: middle;
+}
+
 #getCity {
 	margin-left: 15px;
 	text-align: middle;
-}
-
-#mapType {
-	margin-left: 25px;
-	text-align: middle;
-
 }
 
 #map-canvas {

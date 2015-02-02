@@ -7,7 +7,7 @@ $(document).ready(function() {
   // map object constructor
 
   // will not work locally
-  console.log(myPostion);
+  //console.log(myPostion);
 
   function mapObject () {
     // need to check local storage for last location
@@ -53,16 +53,25 @@ $(document).ready(function() {
     $(".longText").text(latLong.currentLong.toFixed(4));
   }
 
-
-var numb = 123.23454;
-numb = numb.toFixed(2);
-
   function updateMap (latLong) {
+    var myMapTypeID;
+    
+    if ($("#rad1")[0].checked) {
+      myMapTypeID = 'satellite';
+    } else if ($("#rad2")[0].checked) {
+      myMapTypeID = 'hybrid';
+    } else if ($("#rad3")[0].checked) {
+      myMapTypeID = 'terrain';
+    } else if ($("#rad4")[0].checked) {
+      myMapTypeID = 'roadmap';
+    } else {
+      myMapTypeID = 'roadmap';
+    }
 
     var map = new google.maps.Map(document.getElementById('map-canvas'), {
       center: { lat: latLong.currentLat , lng: latLong.currentLong},
       zoom: 4,
-      //mapTypeId: 'coordinate'
+      mapTypeId: myMapTypeID
 
     });
 
