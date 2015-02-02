@@ -10,9 +10,10 @@ body {
   padding: 0;
 }
 
-h2 {
+h1, h2 {
   display: inline-block;
-  margin-left: 10px;
+  margin-left: 40px;
+  font-family: Arial;
 }
 
 h3 {
@@ -20,6 +21,12 @@ h3 {
 	color: white;
 	background: darkgray;
 }
+
+form {
+  display: inline-block;
+  font-family: Arial;
+}
+
 .abs {
 	position: absolute;
 }
@@ -30,6 +37,10 @@ h3 {
 
 .alignMiddle {
 	text-align: middle;
+}
+
+.inlineElem {
+  display: inline-block;
 }
 
 
@@ -51,12 +62,13 @@ h3 {
 
 .content {
   display: inline-block;
-  background-color: yellow;
+  background-color: white;
   height: 415px;
-  width: 200px;
+  width: 400px;
   z-index: 100;
   margin: 20px;
-  border-radius: 5px;
+  border: 5px black solid;
+  border-radius: 15px;
 }
 
 .footer {
@@ -79,9 +91,9 @@ h3 {
   width: 30px;
   background-color: yellow;
   z-index: 100;
-  margin-top: 5px;
-  margin-left: 5px;
-  margin-right: 5px;
+  margin-top: 25px;
+  margin-left: 10px;
+  margin-right: 10px;
   border-bottom: black;
   border-right: black;
   border-width: 5px;
@@ -89,11 +101,17 @@ h3 {
   vertical-align: middle;
 }
 
+#getCity {
+	margin-left: 15px;
+	text-align: middle;
+}
+
 #map-canvas {
   margin: 20px;
+  margin-left: 40;
   border: black 4px solid;
   height: 410px;
   width: 420px;
-  border-radius: 5px;
+  border-radius: 15px;
 
 }

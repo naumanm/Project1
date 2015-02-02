@@ -17,8 +17,8 @@ $(document).ready(function() {
 
     attachEventListeners();
 
-//  need a function to display a loading page for the map
-//      <div id="map-canvas"></div>
+  //  need a function to display a loading page for the map
+  //  <div id="map-canvas"></div>
 
     setInterval(issPositionLoop, 10000); 
 
@@ -94,3 +94,5 @@ $(document).ready(function() {
 initialize();
 
 });
+
+
