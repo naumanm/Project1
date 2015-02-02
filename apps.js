@@ -51,6 +51,7 @@ $(document).ready(function() {
   function updateContent (latLong) {
     $(".latText").text(latLong.currentLat.toFixed(4));
     $(".longText").text(latLong.currentLong.toFixed(4));
+    	$(".zoomValue").text($("#mapZoom").val());
   }
 
   function updateMap (latLong) {
@@ -66,8 +67,6 @@ $(document).ready(function() {
     } else if ($("#rad4")[0].checked) {
       userMapTypeID = 'roadmap';
     } 
-
-    console.log($("#mapZoom").val());
 
     var map = new google.maps.Map(document.getElementById('map-canvas'), {
       center: { lat: latLong.currentLat , lng: latLong.currentLong},
