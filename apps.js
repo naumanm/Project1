@@ -6,29 +6,24 @@ $(document).ready(function() {
 
   // map object constructor
 
-  console.log(myPostion);
+  // will not work locally
+  // console.log(myPostion);
 
   function mapObject () {
     // need to check local storage for last location
-    var myLocation = { lat: 37.5 , lng: -122.5};
-
+    var myLocation = { lat: 37.79 , lng: -122.40};
     var mapOptions = {
       center: myLocation,
       zoom: 4
     };
-
     var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-  
   }
 
   // ---- initialize start loop ----
 
   function initialize() {
-
-    console.log(myPostion());
     attachEventListeners();
     setInterval(issPositionLoop, 5000); 
-
   }
 
   function attachEventListeners() {
@@ -36,20 +31,24 @@ $(document).ready(function() {
   }
 
   function issPositionLoop () {
-      // get ISS data and set callback
-      $.getJSON('http://api.open-notify.org/iss-now.json?callback=?', function(data) {
-        // iterate through the data
-        $.each( data, function() {
-          // create and return hash of lat/long
-          var latLong = {
-          	currentLat: data.iss_position.latitude,
-          	currentLong: data.iss_position.longitude
-          };
-          // update the map with the current lat long
-          console.log(latLong);
-          updateMap(latLong);
-        });
+    // get ISS data and set callback
+    $.getJSON('http://api.open-notify.org/iss-now.json?callback=?', function(data) {
+      // iterate through the data
+      $.each( data, function() {
+        // create and return hash of lat/long
+        var latLong = {
+          currentLat: data.iss_position.latitude,
+          currentLong: data.iss_position.longitude
+        };
+        // update the map with the current lat long
+        updateMap(latLong);
+        updateContent(latLong);
+      });
     });
+  }
+
+  function updateContent (latLong) {
+    console.log(latLong);  	
   }
 
   function updateMap (latLong) {

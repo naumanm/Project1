@@ -8,22 +8,38 @@ body {
   height: 100%; 
   margin: 0; 
   padding: 0;
+  font-family: Arial;
 }
 
 h1, h2, h3, h4 {
   display: inline-block;
   margin-left: 40px;
-  font-family: Arial;
+  text-align: left;
+}
+
+h2 {
+  display: inline-block;
+  text-align: left;
 }
 
 h3 {
-	color: white;
+  color: white;
 }
-
 
 form {
   display: inline-block;
-  font-family: Arial;
+}
+
+p {
+  margin: 10px;
+}
+
+.latText {
+  display: inline-block;  
+}
+
+.longText {
+  display: inline-block;
 }
 
 .abs {
@@ -32,6 +48,10 @@ form {
 
 .alignRight {
 	text-align: right;
+}
+
+.alignLeft {
+	text-align: left;
 }
 
 .alignMiddle {
@@ -64,7 +84,7 @@ form {
   background-color: white;
   height: 415px;
   width: 400px;
-  z-index: 100;
+  z-index: 50;
   margin: 20px;
   border: 5px black solid;
   border-radius: 15px;
