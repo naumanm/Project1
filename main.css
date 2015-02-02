@@ -31,7 +31,7 @@ form {
 }
 
 p {
-  margin: 10px;
+  margin: 20px;
 }
 
 .latText {
@@ -90,6 +90,10 @@ p {
   border-radius: 15px;
 }
 
+.contentText {
+  padding: 20px;
+}
+
 .footer {
   margin: 20px;
   height: 60px;
@@ -129,8 +133,8 @@ p {
   margin: 20px;
   margin-left: 40;
   border: black 4px solid;
-  height: 410px;
-  width: 420px;
+  height: 400px;
+  width: 400px;
   border-radius: 15px;
 
 }

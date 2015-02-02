@@ -15,7 +15,7 @@ $(document).ready(function() {
     var mapOptions = {
       center: myLocation,
       zoom: 4,
-      mapTypeId: 'satellite'
+      // mapTypeId: 'satellite'
     };
     var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
   }
@@ -66,8 +66,8 @@ $(document).ready(function() {
 
     var mapOptions = { 
       center: myCenter,
-      zoom: 2,
-      mapTypeId: 'satellite'
+      zoom: 4,
+      // mapTypeId: 'satellite'
     };
     var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
