@@ -64,14 +64,13 @@ $(document).ready(function() {
       myMapTypeID = 'terrain';
     } else if ($("#rad4")[0].checked) {
       myMapTypeID = 'roadmap';
-    } else {
-      myMapTypeID = 'roadmap';
-    }
+    } 
 
     var map = new google.maps.Map(document.getElementById('map-canvas'), {
       center: { lat: latLong.currentLat , lng: latLong.currentLong},
       zoom: 4,
-      mapTypeId: myMapTypeID
+      mapTypeId: myMapTypeID,
+      disableDefaultUI: true
 
     });
 

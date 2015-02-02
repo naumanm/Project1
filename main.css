@@ -39,6 +39,7 @@ p {
   margin: 20px;
 }
 
+
 .latText {
   display: inline-block;  
 }
@@ -63,10 +64,13 @@ p {
 	text-align: middle;
 }
 
+.center {
+	width: 90%;
+}
+
 .inlineElem {
   display: inline-block;
 }
-
 
 .header {
   margin: 20px;
@@ -74,6 +78,12 @@ p {
   width: 95%;
   background: gray;
   border-radius: 5px;
+}
+
+.title {
+  display: inline-block;
+  height: 30px;
+  width: 50;
 }
 
 .rowBody {
@@ -106,12 +116,12 @@ p {
   background: gray;
   border-radius: 5px;
 }
-.title {
-  display: inline-block;
-  height: 30px;
-  width: 50;
-}
 
+.footerContent {
+  display: inline-block;
+  margin-top: 25px;
+  margin-left: 25px;
+}
 
 .myButton {
   display: inline-block;
