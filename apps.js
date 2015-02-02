@@ -6,21 +6,28 @@ $(document).ready(function() {
 
   // map object constructor
 
+  console.log(myPostion);
+
   function mapObject () {
-    // // need to check local storage for last location
-    var map = new google.maps.Map(document.getElementById('map-canvas'));
+    // need to check local storage for last location
+    var myLocation = { lat: 37.5 , lng: -122.5};
+
+    var mapOptions = {
+      center: myLocation,
+      zoom: 4
+    };
+
+    var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+  
   }
 
   // ---- initialize start loop ----
 
   function initialize() {
 
+    console.log(myPostion());
     attachEventListeners();
-
-  //  need a function to display a loading page for the map
-  //  <div id="map-canvas"></div>
-
-    setInterval(issPositionLoop, 10000); 
+    setInterval(issPositionLoop, 5000); 
 
   }
 
@@ -39,30 +46,32 @@ $(document).ready(function() {
           	currentLong: data.iss_position.longitude
           };
           // update the map with the current lat long
+          console.log(latLong);
           updateMap(latLong);
         });
     });
-    
-    // this should work and is throwing errors
-    // console.log(myPostion());
   }
-
 
   function updateMap (latLong) {
 
-    var myMap = new mapObject ();
+    var myCenter = { lat: latLong.currentLat , lng: latLong.currentLong};
 
-    var mapOptions = {
-      center: { lat: latLong.currentLat , lng: latLong.currentLong},
+    var mapOptions = { 
+      center: myCenter,
       zoom: 4
     };
     var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
+    var marker = new google.maps.Marker({
+      position: myCenter,
+      map: map,
+      title:"ISS",
+      icon:'icon-iss3.png'
+    });
+
   }
 
-
   function myPostion () {
-  // TODO: this is not working!!!
 
     var options = {
       enableHighAccuracy: true,
