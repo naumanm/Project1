@@ -100,7 +100,7 @@ p {
 .content1, .content2{
   display: inline-block;
   background-color: white;
-  height: 100px;
+  height: 135px;
   width: 400px;
   z-index: 50;
   margin: 20px;
@@ -109,7 +109,7 @@ p {
 }
 
 .content2 {
-  height: 400px;
+  height: 360px;
 }
 
 
@@ -122,6 +122,10 @@ p {
 
 .contentText {
   padding: 20px;
+}
+
+.imageDefault{
+  float: right;
 }
 
 .footer {
@@ -155,12 +159,6 @@ p {
 
 .last {
   margin-right: 15px;
-}
-
-#rad1 {
-  margin-left: 25px;
-  margin-bottom: 20px;
-  text-align: middle;
 }
 
 #getCity {

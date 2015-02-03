@@ -23,8 +23,13 @@ $(document).ready(function() {
   // ---- initialize start loop ----
 
   function initialize() {
+  	defaultImage();
     attachEventListeners();
     setInterval(issPositionLoop, 5000); 
+  }
+
+  function defaultImage() {
+    $("#map-canvas").setAttribute();
   }
 
   function attachEventListeners() {

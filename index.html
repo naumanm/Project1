@@ -14,7 +14,7 @@
   <!-- header -->
   <div class="header">
     <div class="abs">
-      <h1>International Space Station Locator</h1>
+      <h1>International Space Station Location</h1>
     </div>
     <div class="alignRight">
       <div class="myButton rightOffset"></div>
@@ -26,7 +26,11 @@
   <div class="rowBody">
     <div class="abs">
       <div id="map-canvas"></div>
-    </div>
+<!--  How to set canvas to a placeholder image
+       <div class="abs">
+        <img class="imageDefault" src="default.png">
+      </div>
+ -->    </div>
     <div class="alignRight">
       <div class="content1 rightOffset">
         <div class="alignLeft contentText">
@@ -36,6 +40,8 @@
             <tr><td></td></tr>
             <tr><td>Latitude:  </td><td><span class="latText">XX.XX</span></td></tr>
             <tr><td>Longitude: </td><td><span class="longText">XX.XX</span></td></tr>
+            <tr><td>Altitude: </td><td>407.2km</td></tr>
+            <tr><td>Velocity: </td><td>2371.kph</td></tr>
           </table>
         </div>    
       </div>
@@ -53,21 +59,28 @@
                 <td><input id="mapZoom" type="range" name="mapZoom" min="2" max="15"></td>
                 <td><label for="mapZOom">Zoom</label></td>
               </tr>
+              <tr><td></td></tr>
+              <tr><td></td></tr>
+              <tr>
+              	<td>Map Style</td>
+              </tr>
+              <tr><td></td></tr>
+              <tr><td></td></tr>
               <tr>
                 <td><input id="rad1" type="radio" name="rad"></td>
-                <td><label for="rad1">Satellite</label></td>
+                <td><label for="rad1">Hybrid</label></td>
               </tr>
               <tr>
-                <td><input id="rad2" type="radio" name="rad"></td>
-                <td><label for="rad2">Hybrid</label></td>
+                <td><input id="rad2" type="radio" name="rad" checked="checked"></td>
+                <td><label for="rad2">Terrain</label></td>
               </tr>
               <tr>
-                <td><input id="rad3" type="radio" name="rad" checked="checked"></td>
-                <td><label for="rad3">Terrain</label></td>
+                <td><input id="rad3" type="radio" name="rad"></td>
+                <td><label for="rad3">Roadmap</label></td>
               </tr>
               <tr>
                 <td><input id="rad4" type="radio" name="rad"></td>
-                <td><label for="rad4">Roadmap</label></td>
+                <td><label for="rad4">Satellite</label></td>
               </tr>
             </table>
           </div>
