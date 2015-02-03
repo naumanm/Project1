@@ -49,12 +49,6 @@ $(document).ready(function() {
 
   function updateMap (myMap, myArray, latLong) {
     var userZoom = parseInt($("#mapZoom").val(), 10);
-
-    // if ($( "#positionTracker" ).checked) {
-    //   console.log("true");
-    // } else {
-    //   console.log("false");
-    // }
     
     if ($("#rad1")[0].checked) {
       userMapTypeID = 'satellite';
@@ -84,15 +78,18 @@ $(document).ready(function() {
     });
 
     // tracking marker
-    myArray.forEach(function (a) {
-      var marker = new google.maps.Marker({
-        position: { lat: a.currentLat , lng: a.currentLong},
-        map: map,
-        title:"track",
-        icon:'trackDot.png',
-        setTilt: 45
+    if ($('#positionTracker').is(':checked')) {
+      console.log("this worked");
+      myArray.forEach(function (a) {
+        var marker = new google.maps.Marker({
+          position: { lat: a.currentLat , lng: a.currentLong},
+          map: map,
+          title:"track",
+          icon:'trackDot.png',
+          setTilt: 45
+        });
       });
-    });
+    } 
   }
 
 // ----------------------------------
