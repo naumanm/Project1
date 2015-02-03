@@ -40,8 +40,8 @@
             <tr><td></td></tr>
             <tr><td>Latitude:  </td><td><span class="latText">XX.XX</span></td></tr>
             <tr><td>Longitude: </td><td><span class="longText">XX.XX</span></td></tr>
-            <tr><td>Altitude: </td><td>407.2km</td></tr>
-            <tr><td>Velocity: </td><td>2371.kph</td></tr>
+            <tr><td>Altitude: </td><td>431 km</td></tr>
+            <tr><td>Velocity: </td><td>27,600 kph</td></tr>
           </table>
         </div>    
       </div>
@@ -68,21 +68,31 @@
               <tr><td></td></tr>
               <tr>
                 <td><input id="rad1" type="radio" name="rad"></td>
-                <td><label for="rad1">Hybrid</label></td>
+                <td><label for="rad1">Satellite</label></td>
               </tr>
               <tr>
-                <td><input id="rad2" type="radio" name="rad" checked="checked"></td>
-                <td><label for="rad2">Terrain</label></td>
+                <td><input id="rad2" type="radio" name="rad"></td>
+                <td><label for="rad2">Hybrid</label></td>
               </tr>
               <tr>
-                <td><input id="rad3" type="radio" name="rad"></td>
-                <td><label for="rad3">Roadmap</label></td>
+                <td><input id="rad3" type="radio" name="rad" checked="checked"></td>
+                <td><label for="rad3">Terrain</label></td>
               </tr>
               <tr>
                 <td><input id="rad4" type="radio" name="rad"></td>
-                <td><label for="rad4">Satellite</label></td>
+                <td><label for="rad4">Roadmap</label></td>
+              </tr>
+              <tr><td></td></tr>
+              <tr><td></td></tr>
+              <tr>
+              	<td>Tracking</td>
+              </tr>
+              <tr>
+                <td><input id="positionTracker" type="checkbox" name="position"></td>
+                <td><label for="positionTracker">Position Tracker</label></td>
               </tr>
             </table>
+
           </div>
 
           <!-- this needs local storage and some control for buttons to stop the loop

@@ -7,7 +7,7 @@ $(document).ready(function() {
   // map object constructor
 
   // will not work locally
-  console.log(myPostion);
+  //console.log(myPostion);
 
   function mapObject () {
     // need to check local storage for last location
@@ -29,7 +29,7 @@ $(document).ready(function() {
   }
 
   function defaultImage() {
-    $("#map-canvas").setAttribute();
+  //  $("#map-canvas").setAttribute();
   }
 
   function attachEventListeners() {
@@ -37,20 +37,16 @@ $(document).ready(function() {
   }
 
   function issPositionLoop () {
-
     // get ISS data and set callback
     $.getJSON('http://api.open-notify.org/iss-now.json?callback=?', function(data) {
-      // iterate through the data
-      $.each( data, function() {
-        // create and return hash of lat/long
-        var latLong = {
-          currentLat: data.iss_position.latitude,
-          currentLong: data.iss_position.longitude
-        };
-        // update the map with the current lat long
-        updateMap(latLong);
-        updateContent(latLong);
-      });
+      // create a hash for lat long
+      var latLong = {
+        currentLat: data.iss_position.latitude,
+        currentLong: data.iss_position.longitude
+      };
+      // update map and UI
+      updateMap(latLong);
+      updateContent(latLong);
     });
   }
 
@@ -63,7 +59,16 @@ $(document).ready(function() {
   function updateMap (latLong) {
     var userMapTypeID;
     var userZoom = parseInt($("#mapZoom").val(), 10);
+
+    if ($( "#positionTracker" ).checked) {
+      console.log("true");
+    } else {
+      console.log("false");
+    }
     
+    console.log("from updateMap");
+    console.log(latLong);
+
     if ($("#rad1")[0].checked) {
       userMapTypeID = 'satellite';
     } else if ($("#rad2")[0].checked) {
