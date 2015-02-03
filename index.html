@@ -15,16 +15,6 @@
   <div class="header">
     <div class="abs">
       <h1>International Space Station Locator</h1>
-
-      <!-- this needs local storage and some control for buttons to stop the loop
-      <h2>Enter City or Location: </h2>
-      <form action="javascript: void(0)">
-        <label for="gitAPI"></label>
-        <input type="text" id="getCity" placeholder="enter location or city...">
-        <input type="submit" value="Submit!">
-      </form>
-      -->
-
     </div>
     <div class="alignRight">
       <div class="myButton rightOffset"></div>
@@ -43,6 +33,7 @@
           <table>
             <tr><td>International Space Station</td></tr>
             <tr><td></td></tr>
+            <tr><td></td></tr>
             <tr><td>Latitude:  </td><td><span class="latText">XX.XX</span></td></tr>
             <tr><td>Longitude: </td><td><span class="longText">XX.XX</span></td></tr>
           </table>
@@ -53,21 +44,43 @@
       <div class="content2 rightOffset">
         <div class="alignLeft contentText">
           <div class="mapControls">
-            <tr><td>Map info</td></tr>
-            <tr><td>Zoom level: </td><td><span class="zoomValue">XX</span></td></tr>
-            <tr><td></td></tr>
-            <tr><td></td></tr>
-            <input id="mapZoom" type="range" name="mapZoom" min="2" max="15">
-            <label for="mapZOom">Zoom</label>
-            <input id="rad1" type="radio" name="rad">
-            <label for="rad1">Satellite</label>
-            <input id="rad2" type="radio" name="rad">
-            <label for="rad2">Hybrid</label>
-            <input id="rad3" type="radio" name="rad" checked="checked">
-            <label for="rad3">Terrain</label>
-            <input id="rad4" type="radio" name="rad">
-            <label for="rad4">Roadmap</label>
+            <table>
+              <tr><td>Map info</td></tr>
+              <tr><td></td></tr>
+              <tr><td></td></tr>
+              <tr><td>Zoom level: </td><td><span class="zoomValue">XX</span></td></tr>
+              <tr>
+                <td><input id="mapZoom" type="range" name="mapZoom" min="2" max="15"></td>
+                <td><label for="mapZOom">Zoom</label></td>
+              </tr>
+              <tr>
+                <td><input id="rad1" type="radio" name="rad"></td>
+                <td><label for="rad1">Satellite</label></td>
+              </tr>
+              <tr>
+                <td><input id="rad2" type="radio" name="rad"></td>
+                <td><label for="rad2">Hybrid</label></td>
+              </tr>
+              <tr>
+                <td><input id="rad3" type="radio" name="rad" checked="checked"></td>
+                <td><label for="rad3">Terrain</label></td>
+              </tr>
+              <tr>
+                <td><input id="rad4" type="radio" name="rad"></td>
+                <td><label for="rad4">Roadmap</label></td>
+              </tr>
+            </table>
           </div>
+
+          <!-- this needs local storage and some control for buttons to stop the loop
+          <h2>Enter City or Location: </h2>
+          <form action="javascript: void(0)">
+            <label for="gitAPI"></label>
+            <input type="text" id="getCity" placeholder="enter location or city...">
+            <input type="submit" value="Submit!">
+          </form>
+          -->
+
         </div>
       </div>
     </div>  
