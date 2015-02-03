@@ -2,8 +2,6 @@
 
 $(document).ready(function() {
   
-  // ---- constructors ----
-
   // map object constructor
   var Map = function mapObject () {
     var myLatlng = new google.maps.LatLng(37.79, -122.40);
@@ -19,18 +17,16 @@ $(document).ready(function() {
 
   function initialize() {
     attachEventListeners();
-
+    var myArray = [];
     var myMap = new Map();
-
-    setInterval(function () {issPositionLoop(myMap);}, 5000); 
-  
+    setInterval(function () {issPositionLoop(myMap, myArray);}, 5000); 
   }
 
   function attachEventListeners() {
     google.maps.event.addDomListener(window, 'load', initialize);
   }
 
-  function issPositionLoop (myMap) {
+  function issPositionLoop (myMap, myArray) {
     // get ISS data and set callback
     $.getJSON('http://api.open-notify.org/iss-now.json?callback=?', function(data) {
       // create a hash for lat long
@@ -39,7 +35,8 @@ $(document).ready(function() {
         currentLong: data.iss_position.longitude
       };
       // update map and UI
-      updateMap(myMap, latLong);
+      myArray.push(latLong);
+      updateMap(myMap, myArray, latLong);
       updateContent(latLong);
     });
   }
@@ -50,15 +47,14 @@ $(document).ready(function() {
     	$(".zoomValue").text($("#mapZoom").val());
   }
 
-  function updateMap (myMap, latLong) {
+  function updateMap (myMap, myArray, latLong) {
     var userZoom = parseInt($("#mapZoom").val(), 10);
 
-
-    if ($( "#positionTracker" ).checked) {
-      console.log("true");
-    } else {
-      console.log("false");
-    }
+    // if ($( "#positionTracker" ).checked) {
+    //   console.log("true");
+    // } else {
+    //   console.log("false");
+    // }
     
     if ($("#rad1")[0].checked) {
       userMapTypeID = 'satellite';
@@ -70,19 +66,7 @@ $(document).ready(function() {
       userMapTypeID = 'roadmap';
     } 
 
-    console.log(myMap);
-    console.log(latLong.currentLat);    
-    console.log(latLong.currentLong);
-
-    //myMap.panTo( new google.maps.LatLng( 0, 0 ) );
-    //myMap.panTo( new google.maps.LatLng( myLat, myLong ) );
-    //myMap.center({ lat: latLong.currentLat , lng: latLong.currentLong});
-    //myMap.center(myLat , myLong);
-    //myMap.panTo (latLong.currentLat , latLong.currentLong);
-
-
-
-
+    // update map object
     map = new google.maps.Map(document.getElementById('map-canvas'), {
       center: { lat: latLong.currentLat , lng: latLong.currentLong},
       mapTypeId: userMapTypeID,
@@ -90,6 +74,7 @@ $(document).ready(function() {
       zoom: userZoom	
     });
 
+    // iss center of map
     var marker = new google.maps.Marker({
       position: { lat: latLong.currentLat , lng: latLong.currentLong},
       map: map,
@@ -98,6 +83,16 @@ $(document).ready(function() {
       setTilt: 45
     });
 
+    // tracking marker
+    myArray.forEach(function (a) {
+      var marker = new google.maps.Marker({
+        position: { lat: a.currentLat , lng: a.currentLong},
+        map: map,
+        title:"track",
+        icon:'trackDot.png',
+        setTilt: 45
+      });
+    });
   }
 
 // ----------------------------------
