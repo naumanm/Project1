@@ -5,38 +5,32 @@ $(document).ready(function() {
   // ---- constructors ----
 
   // map object constructor
-
-  // will not work locally
-  //console.log(myPostion);
-
-  function mapObject () {
-    // need to check local storage for last location
-    var myLocation = { lat: 37.79 , lng: -122.40};
+  var Map = function mapObject () {
+    var myLatlng = new google.maps.LatLng(37.79, -122.40);
     var mapOptions = {
-      center: myLocation,
-      zoom: 4,
-      // mapTypeId: 'satellite'
+      center: myLatlng,
+      zoom: 9,
+      mapTypeId: 'satellite'
     };
-    var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-  }
+    this.map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+  };
 
   // ---- initialize start loop ----
 
   function initialize() {
-  	defaultImage();
     attachEventListeners();
-    setInterval(issPositionLoop, 5000); 
-  }
 
-  function defaultImage() {
-  //  $("#map-canvas").setAttribute();
+    var myMap = new Map();
+
+    setInterval(function () {issPositionLoop(myMap);}, 5000); 
+  
   }
 
   function attachEventListeners() {
     google.maps.event.addDomListener(window, 'load', initialize);
   }
 
-  function issPositionLoop () {
+  function issPositionLoop (myMap) {
     // get ISS data and set callback
     $.getJSON('http://api.open-notify.org/iss-now.json?callback=?', function(data) {
       // create a hash for lat long
@@ -45,7 +39,7 @@ $(document).ready(function() {
         currentLong: data.iss_position.longitude
       };
       // update map and UI
-      updateMap(latLong);
+      updateMap(myMap, latLong);
       updateContent(latLong);
     });
   }
@@ -56,9 +50,9 @@ $(document).ready(function() {
     	$(".zoomValue").text($("#mapZoom").val());
   }
 
-  function updateMap (latLong) {
-    var userMapTypeID;
+  function updateMap (myMap, latLong) {
     var userZoom = parseInt($("#mapZoom").val(), 10);
+
 
     if ($( "#positionTracker" ).checked) {
       console.log("true");
@@ -66,9 +60,6 @@ $(document).ready(function() {
       console.log("false");
     }
     
-    console.log("from updateMap");
-    console.log(latLong);
-
     if ($("#rad1")[0].checked) {
       userMapTypeID = 'satellite';
     } else if ($("#rad2")[0].checked) {
@@ -79,7 +70,20 @@ $(document).ready(function() {
       userMapTypeID = 'roadmap';
     } 
 
-    var map = new google.maps.Map(document.getElementById('map-canvas'), {
+    console.log(myMap);
+    console.log(latLong.currentLat);    
+    console.log(latLong.currentLong);
+
+    //myMap.panTo( new google.maps.LatLng( 0, 0 ) );
+    //myMap.panTo( new google.maps.LatLng( myLat, myLong ) );
+    //myMap.center({ lat: latLong.currentLat , lng: latLong.currentLong});
+    //myMap.center(myLat , myLong);
+    //myMap.panTo (latLong.currentLat , latLong.currentLong);
+
+
+
+
+    map = new google.maps.Map(document.getElementById('map-canvas'), {
       center: { lat: latLong.currentLat , lng: latLong.currentLong},
       mapTypeId: userMapTypeID,
       disableDefaultUI: true,
@@ -93,31 +97,6 @@ $(document).ready(function() {
       icon:'icon-iss3.png',
       setTilt: 45
     });
-
-  }
-
-  function myPostion () {
-
-    var options = {
-      enableHighAccuracy: true,
-      timeout: 5000,
-      maximumAge: 0
-    };
-
-    function success(pos) {
-      var crd = pos.coords;
-
-      console.log('Your current position is:');
-      console.log('Latitude : ' + crd.latitude);
-      console.log('Longitude: ' + crd.longitude);
-      console.log('More or less ' + crd.accuracy + ' meters.');
-    }
-
-    function error(err) {
-      console.warn('ERROR(' + err.code + '): ' + err.message);
-    }
-
-    return navigator.geolocation.getCurrentPosition(success, error, options);
 
   }
 
