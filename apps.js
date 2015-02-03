@@ -7,7 +7,7 @@ $(document).ready(function() {
   // map object constructor
 
   // will not work locally
-  //console.log(myPostion);
+  console.log(myPostion);
 
   function mapObject () {
     // need to check local storage for last location
@@ -32,6 +32,7 @@ $(document).ready(function() {
   }
 
   function issPositionLoop () {
+
     // get ISS data and set callback
     $.getJSON('http://api.open-notify.org/iss-now.json?callback=?', function(data) {
       // iterate through the data
@@ -79,7 +80,8 @@ $(document).ready(function() {
       position: { lat: latLong.currentLat , lng: latLong.currentLong},
       map: map,
       title:"ISS",
-      icon:'icon-iss3.png'
+      icon:'icon-iss3.png',
+      setTilt: 45
     });
 
   }
