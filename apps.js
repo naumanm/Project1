@@ -47,23 +47,27 @@ $(document).ready(function() {
     	$(".zoomValue").text($("#mapZoom").val());
   }
 
+  // helper function to return the map style radio button
+  function mapStyle() {
+    if ($("#rad1")[0].checked) {
+      return 'satellite';
+    } else if ($("#rad2")[0].checked) {
+      return 'hybrid';
+    } else if ($("#rad3")[0].checked) {
+      return 'terrain';
+    } else if ($("#rad4")[0].checked) {
+      return 'roadmap';
+    } 
+  }
+  
+  // repaints the map, needs improvement
   function updateMap (myMap, myArray, latLong) {
     var userZoom = parseInt($("#mapZoom").val(), 10);
     
-    if ($("#rad1")[0].checked) {
-      userMapTypeID = 'satellite';
-    } else if ($("#rad2")[0].checked) {
-      userMapTypeID = 'hybrid';
-    } else if ($("#rad3")[0].checked) {
-      userMapTypeID = 'terrain';
-    } else if ($("#rad4")[0].checked) {
-      userMapTypeID = 'roadmap';
-    } 
-
     // update map object
     map = new google.maps.Map(document.getElementById('map-canvas'), {
       center: { lat: latLong.currentLat , lng: latLong.currentLong},
-      mapTypeId: userMapTypeID,
+      mapTypeId: mapStyle(),
       disableDefaultUI: true,
       zoom: userZoom	
     });
@@ -79,7 +83,6 @@ $(document).ready(function() {
 
     // tracking marker
     if ($('#positionTracker').is(':checked')) {
-      console.log("this worked");
       myArray.forEach(function (a) {
         var marker = new google.maps.Marker({
           position: { lat: a.currentLat , lng: a.currentLong},
@@ -94,7 +97,7 @@ $(document).ready(function() {
 
 // ----------------------------------
 
-// lets start the party!
+// lets get it started...
 
 initialize();
 
