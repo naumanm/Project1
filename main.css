@@ -14,7 +14,7 @@ body {
 
 }
 
-h1, h2, h3, h4 {
+h1, h2 {
   display: inline-block;
   margin-left: 40px;
   text-align: left;
@@ -29,10 +29,6 @@ h2 {
   text-align: left;
 }
 
-h3 {
-  color: white;
-}
-
 form {
   display: inline-block;
 }
@@ -43,7 +39,7 @@ p {
 
 /* CLASSES */
 
-.latText {
+.inline {
   display: inline-block;  
 }
 
@@ -59,10 +55,6 @@ p {
 	text-align: right;
 }
 
-.alignLeft {
-	text-align: left;
-}
-
 .alignMiddle {
 	text-align: middle;
 }
@@ -71,12 +63,8 @@ p {
 	width: 90%;
 }
 
-.inlineElem {
-  display: inline-block;
-}
-
 .header {
-  margin: 20px;
+  margin: 10px;
   height: 75px;
   width: 95%;
   background: gray;
@@ -90,7 +78,7 @@ p {
 }
 
 .rowBody {
-  margin: 20px;
+  margin: 10px;
   height: 600px;
   width: 95%;
   background: gray;
@@ -103,24 +91,27 @@ p {
   height: 135px;
   width: 400px;
   z-index: 50;
-  margin: 20px;
+  margin-top: 10px;
+  margin-right: 10px;
   border: 5px black solid;
   border-radius: 15px;
+  text-align: center;
 }
 
 .content2 {
-  height: 360px;
+  height: 415px;
+  margin-top: 5px;
+  text-align: center;
 }
 
 .mapControls {
   display: inline-block;
   background-color: white;
-  width: 50%;
-
+  text-align: center;
 }
 
 .contentText {
-  padding: 20px;
+  padding: 10px;
 }
 
 .imageDefault{
@@ -128,7 +119,7 @@ p {
 }
 
 .footer {
-  margin: 20px;
+  margin: 10px;
   height: 60px;
   width: 95%;
   background: gray;
@@ -137,8 +128,8 @@ p {
 
 .footerContent {
   display: inline-block;
-  margin-top: 25px;
-  margin-left: 25px;
+  margin-top: 10px;
+  margin-left: 10px;
 }
 
 .myButton {
@@ -168,10 +159,10 @@ p {
 }
 
 #map-canvas {
-  margin-top: 20px;
-  margin-left: 20px;
+  margin-top: 10px;
+  margin-left: 10px;
   border: black 4px solid;
-  height: 550px;
+  height: 570px;
   width: 700px;
   border-radius: 15px;
 }
