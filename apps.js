@@ -61,7 +61,7 @@ $(document).ready(function() {
       position: { lat: latLong.currentLat , lng: latLong.currentLong},
       map: map,
       title:"ISS",
-      icon:'icon-iss3.png',
+      icon: displayISSIcon(),
       setTilt: 45
     });
 
@@ -80,6 +80,15 @@ $(document).ready(function() {
   }
 
 // ---- helper functions ----
+
+  // return icon value for display
+  function displayISSIcon () {
+    if ($('#iconSwitch').is(':checked')) {
+        return 'icon-iss3.png';
+    } else {
+        return 'blueDot.png';
+    }
+  }
 
   function updateLocalStorage () {
     // TODO: should wrap this in an if to see if a change is needed
