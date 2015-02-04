@@ -7,7 +7,8 @@ $(document).ready(function() {
     var mapOptions = {
       center: new google.maps.LatLng(37.79, -122.40),
       zoom: 9,
-      mapTypeId: 'satellite'
+      mapTypeId: 'satellite',
+      disableDefaultUI: true
     };
     this.map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
   };
@@ -47,29 +48,15 @@ $(document).ready(function() {
     	$(".zoomValue").text($("#mapZoom").val());
   }
 
-  // helper function to return the map style radio button
-  function mapStyle() {
-    if ($("#rad1")[0].checked) {
-      return 'satellite';
-    } else if ($("#rad2")[0].checked) {
-      return 'hybrid';
-    } else if ($("#rad3")[0].checked) {
-      return 'terrain';
-    } else if ($("#rad4")[0].checked) {
-      return 'roadmap';
-    } 
-  }
-  
   // updates map, needs improvement
   function updateMap (myMap, trackingArray, latLong) {
-    var userZoom = parseInt($("#mapZoom").val(), 10);
     
     // update map object
     map = new google.maps.Map(document.getElementById('map-canvas'), {
       center: { lat: latLong.currentLat , lng: latLong.currentLong},
       mapTypeId: mapStyle(),
       disableDefaultUI: true,
-      zoom: userZoom	
+      zoom: userZoom()
     });
 
     // put iss icon on center of map
@@ -93,6 +80,24 @@ $(document).ready(function() {
         });
       });
     } 
+  }
+
+  // helper function to return the map style radio button value
+  function mapStyle() {
+    if ($("#rad1")[0].checked) {
+      return 'satellite';
+    } else if ($("#rad2")[0].checked) {
+      return 'hybrid';
+    } else if ($("#rad3")[0].checked) {
+      return 'terrain';
+    } else if ($("#rad4")[0].checked) {
+      return 'roadmap';
+    } 
+  }
+
+  // helper function to get value of zoom slider  
+  function userZoom () {
+    return parseInt($("#mapZoom").val(), 10);
   }
 
 // ----------------------------------
