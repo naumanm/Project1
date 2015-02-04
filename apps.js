@@ -19,7 +19,8 @@ $(document).ready(function() {
 
   // initialize and start loop 
   function initialize() {
-    var trackingArray = [];
+    //getTrackingArray();
+    var trackingArray = getTrackingArray();
     var myMap = new Map();
     attachEventListeners();
     updateStyleUI();
@@ -41,14 +42,14 @@ $(document).ready(function() {
       trackingArray.push(latLong);
       updateMap(myMap, trackingArray, latLong);
       updateContent(latLong);
-      updateLocalStorage(latLong);
+      updateLocalStorage(trackingArray);
     });
   }
   
-  // updates map, needs improvement
+  // update the map
   function updateMap (myMap, trackingArray, latLong) {
 
-    // update map object
+    // this is creating a new map object, should update the existing one
     map = new google.maps.Map(document.getElementById('map-canvas'), {
       center: { lat: latLong.currentLat , lng: latLong.currentLong},
       mapTypeId: getMapStyleUI(),
@@ -90,10 +91,18 @@ $(document).ready(function() {
     }
   }
 
-  function updateLocalStorage () {
+  function updateLocalStorage (trackingArray) {
     // TODO: should wrap this in an if to see if a change is needed
     localStorage.setItem("mapStyle", getMapStyleUI());
     localStorage.setItem("userZoom", getUserZoomUI());
+    localStorage.setItem("myTrackingArray", JSON.stringify(trackingArray));
+ 
+    console.log(trackingArray);
+  }
+
+  function getTrackingArray () {
+    console.log(JSON.parse(localStorage.getItem("myTrackingArray"))); 
+    return JSON.parse(localStorage.getItem("myTrackingArray"));
   }
 
   function attachEventListeners() {
