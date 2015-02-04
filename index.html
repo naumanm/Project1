@@ -29,82 +29,81 @@
     </div>
     <div class="alignRight">
       <div class="content1">
-        <div class="alignLeft contentText">
+
           <table>
-            <tr><td>International Space Station</td></tr>
-            <tr><td>Latitude:  </td><td><span class="inline">XX.XX</span></td></tr>
-            <tr><td>Longitude: </td><td><span class="inline">XX.XX</span></td></tr>
+            <tr><td colspan="2">International Space Station</td></tr>
+            <tr><td>Latitude:  </td><td><span class="latText">XX.XX</span></td></tr>
+            <tr><td>Longitude: </td><td><span class="longText">XX.XX</span></td></tr>
             <tr><td>Altitude: </td><td>431 km</td></tr>
             <tr><td>Velocity: </td><td>27,600 kph</td></tr>
           </table>
-        </div>    
+    
       </div>
     </div>
     <div class="alignRight">
       <div class="content2">
-        <div class="alignCenter contentText">
-          <div class="mapControls">
-            <table>
-              <tr><td>Zoom level: </td><td><span class="zoomValue">XX</span></td></tr>
-              <tr>
-                <td><input id="mapZoom" type="range" name="mapZoom" min="2" max="15"></td>
-              </tr>
-              <tr><td></td></tr>
-              <tr><td></td></tr>
-              <tr>
-              	<td>Map Style</td>
-              </tr>
-              <tr><td></td></tr>
-              <tr><td></td></tr>
-              <tr>
-                <td><input id="rad1" type="radio" name="rad"></td>
-                <td><label for="rad1">Satellite</label></td>
-              </tr>
-              <tr>
-                <td><input id="rad2" type="radio" name="rad"></td>
-                <td><label for="rad2">Hybrid</label></td>
-              </tr>
-              <tr>
-                <td><input id="rad3" type="radio" name="rad" checked="checked"></td>
-                <td><label for="rad3">Terrain</label></td>
-              </tr>
-              <tr>
-                <td><input id="rad4" type="radio" name="rad"></td>
-                <td><label for="rad4">Roadmap</label></td>
-              </tr>
-              <tr><td></td></tr>
-              <tr><td></td></tr>
-              <tr>
-              	<td>Tracking</td>
-              </tr>
-              <tr>
-                <td><input id="positionTracker" type="checkbox" name="position"></td>
-                <td><label for="positionTracker">Position Tracker</label></td>
-              </tr>
-            </table>
-
-          </div>
-
-          <!-- this needs local storage and some control for buttons to stop the loop
-          <h2>Enter City or Location: </h2>
-          <form action="javascript: void(0)">
-            <label for="gitAPI"></label>
-            <input type="text" id="getCity" placeholder="enter location or city...">
-            <input type="submit" value="Submit!">
-          </form>
-          -->
-
+        <div class="mapControls">
+          <table>
+            <tr><td>Zoom level: </td><td><span class="zoomValue">XX</span></td></tr>
+            <tr>
+              <td><input id="mapZoom" type="range" name="mapZoom" min="2" max="15"></td>
+            </tr>
+            <tr><td></td></tr>
+            <tr><td></td></tr>
+            <tr>
+            	<td>Map Style</td>
+            </tr>
+            <tr><td></td></tr>
+            <tr><td></td></tr>
+            <tr>
+              <td><input id="rad1" type="radio" name="rad"></td>
+              <td><label for="rad1">Satellite</label></td>
+            </tr>
+            <tr>
+              <td><input id="rad2" type="radio" name="rad"></td>
+              <td><label for="rad2">Hybrid</label></td>
+            </tr>
+            <tr>
+              <td><input id="rad3" type="radio" name="rad" checked="checked"></td>
+              <td><label for="rad3">Terrain</label></td>
+            </tr>
+            <tr>
+              <td><input id="rad4" type="radio" name="rad"></td>
+              <td><label for="rad4">Roadmap</label></td>
+            </tr>
+            <tr><td></td></tr>
+            <tr><td></td></tr>
+            <tr>
+            	<td>Tracking</td>
+            </tr>
+            <tr>
+              <td><input id="positionTracker" type="checkbox" name="position"></td>
+              <td><label for="positionTracker">Position Tracker</label></td>
+            </tr>
+          </table>
         </div>
+
+        <!-- this needs local storage and some control for buttons to stop the loop
+        <h2>Enter City or Location: </h2>
+        <form action="javascript: void(0)">
+          <label for="gitAPI"></label>
+          <input type="text" id="getCity" placeholder="enter location or city...">
+          <input type="submit" value="Submit!">
+        </form>
+        -->
+
       </div>
     </div>  
   </div>
 <!-- footer -->
   <div class="footer">
-    <div class="center">
-      <div class="footerContent">General Assembly WDI</div>
-      <div class="footerContent">mikeNauman</div>
-      <div class="footerContent">February 7th 2015</div>
-    </div>
+    <table>
+      <tr>
+        <td>General Assembly WDI</td>
+        <td>mikeNauman</td>
+        <td>February 7th 2015</td>
+      </tr>
+    </table>
   </div>
 </body>
 </html>

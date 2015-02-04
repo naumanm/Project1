@@ -29,6 +29,11 @@ h2 {
   text-align: left;
 }
 
+table {
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
 form {
   display: inline-block;
 }
@@ -39,8 +44,8 @@ p {
 
 /* CLASSES */
 
-.inline {
-  display: inline-block;  
+.latText {
+  display: inline-block;
 }
 
 .longText {
@@ -57,10 +62,6 @@ p {
 
 .alignMiddle {
 	text-align: middle;
-}
-
-.center {
-	width: 90%;
 }
 
 .header {
@@ -89,7 +90,7 @@ p {
   display: inline-block;
   background-color: white;
   height: 135px;
-  width: 400px;
+  width: 270px;
   z-index: 50;
   margin-top: 10px;
   margin-right: 10px;
@@ -110,10 +111,6 @@ p {
   text-align: center;
 }
 
-.contentText {
-  padding: 10px;
-}
-
 .imageDefault{
   float: right;
 }
@@ -128,8 +125,7 @@ p {
 
 .footerContent {
   display: inline-block;
-  margin-top: 10px;
-  margin-left: 10px;
+  text-align: center;
 }
 
 .myButton {
@@ -154,8 +150,8 @@ p {
 /* IDs */
 
 #getCity {
-	margin-left: 15px;
-	text-align: middle;
+	margin-left: 15px
+	text: middle;
 }
 
 #map-canvas {
@@ -163,6 +159,6 @@ p {
   margin-left: 10px;
   border: black 4px solid;
   height: 570px;
-  width: 700px;
+  width: 800px;
   border-radius: 15px;
 }
