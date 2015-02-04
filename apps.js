@@ -32,6 +32,7 @@ $(document).ready(function() {
     // get ISS data and set callback
     $.getJSON('http://api.open-notify.org/iss-now.json?callback=?', function(data) {
       // create a hash for lat long
+      // TODO: this hash contains more than one lat & long
       var latLong = {
         currentLat: data.iss_position.latitude,
         currentLong: data.iss_position.longitude
@@ -78,15 +79,6 @@ $(document).ready(function() {
     } 
   }
 
-  // updates UI for current map values
-  function updateContent (latLong) {
-    $(".latText").text(latLong.currentLat.toFixed(4));
-    $(".longText").text(latLong.currentLong.toFixed(4));
-    $(".altitudeText").text("431 km");
-    $(".velocityText").text("27,600 kph");
-  }
-
-
 // ---- helper functions ----
 
   function updateLocalStorage () {
@@ -97,6 +89,15 @@ $(document).ready(function() {
 
   function attachEventListeners() {
     google.maps.event.addDomListener(window, 'load', initialize);
+  }
+
+  // updates UI for current map values
+  function updateContent (latLong) {
+    $(".latText").text(latLong.currentLat.toFixed(4));
+    $(".longText").text(latLong.currentLong.toFixed(4));
+    $(".altitudeText").text("431 km");
+    $(".velocityText").text("27,600 kph");
+    $(".zoomValue").text(getUserZoomUI());
   }
 
   // returns style from storage
@@ -147,6 +148,7 @@ $(document).ready(function() {
   // updates zoom UI from local storage
   function updateZoomUI () {
     $("#mapZoom").prop('value', localStorage.getItem("userZoom") );
+    $(".zoomValue").text(localStorage.getItem("userZoom"));
   }
 
   // returns value of zoom UI
@@ -156,7 +158,7 @@ $(document).ready(function() {
 
 // ----------------------------------
 
-// lets get it started...
+// letsDoThis...
 
 initialize();
 
