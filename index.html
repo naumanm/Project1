@@ -46,7 +46,7 @@
           <table>
             <tr><td>Zoom level: </td><td><span class="zoomValue">XX</span></td></tr>
             <tr>
-              <td><input id="mapZoom" type="range" name="mapZoom" min="2" max="15"></td>
+              <td><input id="mapZoom" type="range" name="mapZoom" min="2" max="15" value="4"></td>
             </tr>
             <tr><td></td></tr>
             <tr><td></td></tr>
@@ -60,11 +60,11 @@
               <td><label for="rad1">Satellite</label></td>
             </tr>
             <tr>
-              <td><input id="rad2" type="radio" name="rad"></td>
+              <td><input id="rad2" type="radio" name="rad" checked="checked"></td>
               <td><label for="rad2">Hybrid</label></td>
             </tr>
             <tr>
-              <td><input id="rad3" type="radio" name="rad" checked="checked"></td>
+              <td><input id="rad3" type="radio" name="rad"></td>
               <td><label for="rad3">Terrain</label></td>
             </tr>
             <tr>
@@ -77,7 +77,7 @@
             	<td>Tracking</td>
             </tr>
             <tr>
-              <td><input id="positionTracker" type="checkbox" name="position"></td>
+              <td><input id="positionTracker" type="checkbox" name="position" checked="checked"></td>
               <td><label for="positionTracker">Position Tracker</label></td>
             </tr>
           </table>
@@ -97,13 +97,11 @@
   </div>
 <!-- footer -->
   <div class="footer">
-    <table>
-      <tr>
-        <td>General Assembly WDI</td>
-        <td>mikeNauman</td>
-        <td>February 7th 2015</td>
-      </tr>
-    </table>
+    <div class="footerContent">
+      <div class="footerText">General Assembly WDI</div>
+      <div class="footerText">mikeNauman</div>
+      <div class="footerText">February 7th 2015</div>
+    </div>
   </div>
 </body>
 </html>

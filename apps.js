@@ -6,7 +6,7 @@ $(document).ready(function() {
   var Map = function mapObject () {
     var mapOptions = {
       center: new google.maps.LatLng(37.79, -122.40),
-      zoom: 9,
+      zoom: 4,
       mapTypeId: 'satellite',
       disableDefaultUI: true
     };
@@ -51,10 +51,6 @@ $(document).ready(function() {
   // updates map, needs improvement
   function updateMap (myMap, trackingArray, latLong) {
     
-    console.log(myMap);
-    console.log(trackingArray);
-    console.log(latLong);
-
     // update map object
     map = new google.maps.Map(document.getElementById('map-canvas'), {
       center: { lat: latLong.currentLat , lng: latLong.currentLong},

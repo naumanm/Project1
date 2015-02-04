@@ -67,9 +67,10 @@ p {
 .header {
   margin: 10px;
   height: 75px;
-  width: 95%;
+  width: 98%;
   background: gray;
   border-radius: 15px;
+  border-radius: 15px;box-shadow: 10px 5px 5px black;
 }
 
 .title {
@@ -81,9 +82,10 @@ p {
 .rowBody {
   margin: 10px;
   height: 600px;
-  width: 95%;
+  width: 98%;
   background: gray;
   border-radius: 15px;
+  border-radius: 15px;box-shadow: 10px 5px 5px black;
 }
 
 .content1, .content2{
@@ -93,10 +95,11 @@ p {
   width: 270px;
   z-index: 50;
   margin-top: 10px;
-  margin-right: 10px;
+  margin-right: 20px;
   border: 5px black solid;
   border-radius: 15px;
   text-align: center;
+  box-shadow: 10px 5px 5px black;
 }
 
 .content2 {
@@ -109,23 +112,30 @@ p {
   display: inline-block;
   background-color: white;
   text-align: center;
-}
-
-.imageDefault{
-  float: right;
+  margin: 7px;
 }
 
 .footer {
   margin: 10px;
   height: 60px;
-  width: 95%;
+  width: 98%;
   background: gray;
   border-radius: 15px;
+  box-shadow: 10px 5px 5px black;
 }
 
 .footerContent {
+  margin: 0 auto;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 40px;
+
+}
+
+.footerText {
   display: inline-block;
   text-align: center;
+  margin: 10px;
 }
 
 .myButton {
@@ -161,4 +171,5 @@ p {
   height: 570px;
   width: 800px;
   border-radius: 15px;
+  box-shadow: 10px 5px 5px black;
 }
