@@ -90,7 +90,7 @@ p {
 
 .content1, .content2{
   display: inline-block;
-  background-color: white;
+  background-color: #E0EBEB;
   height: 135px;
   width: 270px;
   z-index: 50;
@@ -110,7 +110,6 @@ p {
 
 .mapControls {
   display: inline-block;
-  background-color: white;
   text-align: center;
   margin: 7px;
 }

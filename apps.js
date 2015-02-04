@@ -4,14 +4,47 @@ $(document).ready(function() {
   
   // map object constructor
   var Map = function mapObject () {
+
     var mapOptions = {
       center: new google.maps.LatLng(37.79, -122.40),
-      zoom: 4,
-      mapTypeId: 'satellite',
+      zoom: getStoredZoom(),
+      mapTypeId: getStoredStyle(),
       disableDefaultUI: true
     };
     this.map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
   };
+
+  // get and return zoom from local storage
+  function getStoredZoom() {
+    if(parseInt(localStorage.getItem("userZoom")) > 0) {
+      $("#mapZoom").prop('value', localStorage.getItem("userZoom"));
+      return (parseInt(localStorage.getItem("userZoom")));
+    }
+  }
+
+  // get and return map style from local storage
+  function getStoredStyle () {
+    if(localStorage.getItem("mapStyle").length > 0) {
+      // update the UI to reflect the storage value
+      if (localStorage.getItem("mapStyle") === "satellite") {
+        $("#rad1").prop('checked', true);
+        $('#rad1').attr('checked', true);
+      } else if (localStorage.getItem("mapStyle") === "hybrid") {
+        $("#rad2").prop('checked', true);
+      } else if (localStorage.getItem("mapStyle") === "terrain") {
+        $("#rad3").prop('checked', true);
+      } else if (localStorage.getItem("mapStyle") === "roadmap") {
+        $("#rad4").prop('checked', true);
+      } else if (localStorage.getItem("mapStyle") === "undefined") {
+        console.log("mapStyle is undefined");
+      }
+      // return the storage item
+      return localStorage.getItem("mapStyle");
+    } else {
+        console.log("mapStyle length is < 0");
+        return "roadmap";
+    }
+  }
 
   // initialize and start loop 
   function initialize() {
@@ -38,19 +71,31 @@ $(document).ready(function() {
       trackingArray.push(latLong);
       updateMap(myMap, trackingArray, latLong);
       updateContent(latLong);
+      updateLocalStorage(latLong);
     });
   }
   
+  function updateLocalStorage () {
+    // should wrap this in an if to see if a change is needed
+    localStorage.setItem("mapStyle", mapStyle());
+    localStorage.setItem("userZoom", userZoom());
+
+    console.log("Storage style: " + localStorage.getItem("mapStyle"));
+    console.log("Storage zoom: " + localStorage.getItem("userZoom"));
+  }
+
   // updates UI for current map values
   function updateContent (latLong) {
     $(".latText").text(latLong.currentLat.toFixed(4));
     $(".longText").text(latLong.currentLong.toFixed(4));
-    	$(".zoomValue").text($("#mapZoom").val());
+    $(".zoomValue").text($("#mapZoom").val());
+    $(".altitudeText").text("431 km");
+    $(".velocityText").text("27,600 kph");
   }
 
   // updates map, needs improvement
   function updateMap (myMap, trackingArray, latLong) {
-    
+
     // update map object
     map = new google.maps.Map(document.getElementById('map-canvas'), {
       center: { lat: latLong.currentLat , lng: latLong.currentLong},
@@ -96,7 +141,7 @@ $(document).ready(function() {
   }
 
   // helper function to get value of zoom slider  
-  function userZoom () {
+  function userZoom() {
     return parseInt($("#mapZoom").val(), 10);
   }
 
