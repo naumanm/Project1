@@ -4,29 +4,28 @@ $(document).ready(function() {
   
   // map object constructor
   var Map = function mapObject () {
-    var myLatlng = new google.maps.LatLng(37.79, -122.40);
     var mapOptions = {
-      center: myLatlng,
+      center: new google.maps.LatLng(37.79, -122.40),
       zoom: 9,
       mapTypeId: 'satellite'
     };
     this.map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
   };
 
-  // ---- initialize start loop ----
-
+  // initialize and start loop 
   function initialize() {
-    attachEventListeners();
-    var myArray = [];
+    var trackingArray = [];
     var myMap = new Map();
-    setInterval(function () {issPositionLoop(myMap, myArray);}, 5000); 
+    attachEventListeners();
+    setInterval(function () {issPositionLoop(myMap, trackingArray);}, 5000); 
   }
 
+  // attach listeners
   function attachEventListeners() {
     google.maps.event.addDomListener(window, 'load', initialize);
   }
 
-  function issPositionLoop (myMap, myArray) {
+  function issPositionLoop (myMap, trackingArray) {
     // get ISS data and set callback
     $.getJSON('http://api.open-notify.org/iss-now.json?callback=?', function(data) {
       // create a hash for lat long
@@ -34,13 +33,14 @@ $(document).ready(function() {
         currentLat: data.iss_position.latitude,
         currentLong: data.iss_position.longitude
       };
-      // update map and UI
-      myArray.push(latLong);
-      updateMap(myMap, myArray, latLong);
+      // update map trackingArray and UI
+      trackingArray.push(latLong);
+      updateMap(myMap, trackingArray, latLong);
       updateContent(latLong);
     });
   }
-
+  
+  // updates UI for current map values
   function updateContent (latLong) {
     $(".latText").text(latLong.currentLat.toFixed(4));
     $(".longText").text(latLong.currentLong.toFixed(4));
@@ -60,8 +60,8 @@ $(document).ready(function() {
     } 
   }
   
-  // repaints the map, needs improvement
-  function updateMap (myMap, myArray, latLong) {
+  // updates map, needs improvement
+  function updateMap (myMap, trackingArray, latLong) {
     var userZoom = parseInt($("#mapZoom").val(), 10);
     
     // update map object
@@ -72,7 +72,7 @@ $(document).ready(function() {
       zoom: userZoom	
     });
 
-    // iss center of map
+    // put iss icon on center of map
     var marker = new google.maps.Marker({
       position: { lat: latLong.currentLat , lng: latLong.currentLong},
       map: map,
@@ -81,9 +81,9 @@ $(document).ready(function() {
       setTilt: 45
     });
 
-    // tracking marker
+    // place tracking markers
     if ($('#positionTracker').is(':checked')) {
-      myArray.forEach(function (a) {
+      trackingArray.forEach(function (a) {
         var marker = new google.maps.Marker({
           position: { lat: a.currentLat , lng: a.currentLong},
           map: map,
