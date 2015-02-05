@@ -51,6 +51,11 @@ $(document).ready(function() {
   // update the map
   function updateMap (myMap, trackingArray, latLong) {
 
+    console.log("my map " + myMap);
+    console.log("my trackingArray " + trackingArray);
+    console.log("my latLong " + latLong);
+
+
     // this is creating a new map object, should update the existing one
     map = new google.maps.Map(document.getElementById('map-canvas'), {
       center: { lat: latLong.currentLat , lng: latLong.currentLong},
@@ -119,7 +124,14 @@ $(document).ready(function() {
   }
 
   function getTrackingArray () {
-    return JSON.parse(localStorage.getItem("myTrackingArray"));    
+
+    var myArray =  JSON.parse(localStorage.getItem("myTrackingArray"));    
+
+    // if (myArray.length === null) {
+    //   return []; 
+    // } else {
+       return myArray;
+    // }
   }
 
   function attachEventListeners() {
