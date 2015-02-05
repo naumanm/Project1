@@ -22,10 +22,8 @@ $(document).ready(function() {
   function initialize() {
     trackingArray = getTrackingArray();
     myMap = new Map();
-    //attachEventListeners();
     updateStyleUI();
     updateZoomUI();
-
     setInterval(function () {issPositionLoop(myMap, trackingArray);}, 5000); 
   }
 
@@ -135,10 +133,6 @@ $(document).ready(function() {
       return JSON.parse(localStorage.getItem("trackingArray"));
     }
     return myArray;
-  }
-
-  function attachEventListeners() {
-    //google.maps.event.addDomListener(window, 'load', initialize);
   }
 
   // updates UI for current map values
