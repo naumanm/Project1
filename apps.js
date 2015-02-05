@@ -5,6 +5,7 @@ $(document).ready(function() {
 // ---- constructors ----
 
   var trackingArray;
+  var markerArray = [];
 
   var Map = function mapObject () {
     var mapOptions = {
@@ -16,19 +17,34 @@ $(document).ready(function() {
     this.map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
   };
 
+  var Marker = function markerObject () {
+    var markerOptions = {
+      position: { lat: 37.79 , lng: -122.40},
+      map: this.map,
+      title:"ISS",
+      icon: displayISSIcon(),
+      setTilt: 45
+    };
+    this.marker = new google.maps.Marker(markerOptions);
+  };
+
+
+
+
 // ---- main ----
 
   // initialize and start loop 
   function initialize() {
     trackingArray = getTrackingArray();
     myMap = new Map();
+    myMarker = new Marker();
     updateStyleUI();
     updateZoomUI();
-    setInterval(function () {issPositionLoop(myMap, trackingArray);}, 5000); 
+    setInterval(function () {issPositionLoop(myMap, myMarker, trackingArray);}, 5000); 
   }
 
   // execute on each setInterval
-  function issPositionLoop (myMap, trackingArray) {
+  function issPositionLoop (myMap, myMarker, trackingArray) {
     // get ISS data and set callback
     $.getJSON('http://api.open-notify.org/iss-now.json?callback=?', function(data) {
       // create a hash for lat long
@@ -40,14 +56,14 @@ $(document).ready(function() {
       // update map trackingArray and UI
       updateTrackingArray(trackingArray, latLong);
       getWeatherData(latLong);
-      updateMap(myMap, trackingArray, latLong);
+      updateMap(myMap, myMarker, trackingArray, latLong);
       updateContent(latLong);
       updateLocalStorage(trackingArray);
     });
   }
   
   // update the map
-  function updateMap (myMap, trackingArray, latLong) {
+  function updateMap (myMap, myMarker, trackingArray, latLong) {
 
     var map = myMap.map;
     //update the map
@@ -57,30 +73,57 @@ $(document).ready(function() {
 
     // need to delete previous markers
 
+    console.log(myMarker);
+    console.log(latLong);
+    console.log(latLong.currentLat);
+    console.log(latLong.currentLong);
+
+//    myMarker.setPosition( LatLng( latLong.currentLat, latLong.currentLong ) );
+
+    //( new google.maps.LatLng( latLong.currentLat, latLong.currentLong ) );
+
     // this puts another iss icon on center of map
-    var marker = new google.maps.Marker({
-      position: { lat: latLong.currentLat , lng: latLong.currentLong},
-      map: map,
-      title:"ISS",
-      icon: displayISSIcon(),
-      setTilt: 45
-    });
+    // var issMarker = new google.maps.Marker({
+    //   position: { lat: latLong.currentLat , lng: latLong.currentLong},
+    //   map: map,
+    //   title:"ISS",
+    //   icon: displayISSIcon(),
+    //   setTilt: 45
+    // });
 
     // place tracking markers
     if ($('#positionTracker').is(':checked')) {
-      trackingArray.forEach(function (a) {
-        var marker = new google.maps.Marker({
-          position: { lat: a.currentLat , lng: a.currentLong},
-          map: map,
-          title:"track",
-          icon:'trackDot.png',
-          setTilt: 45
-        });
-      });
-    } 
+      drawPositionMarkers(myMap, trackingArray);
+    } else {
+      removePositionMarkers(myMap, trackingArray);
+    }
   }
 
 // ---- helper functions ----
+
+  function drawPositionMarkers (myMap, trackingArray) {
+    var map = myMap.map;
+
+    trackingArray.forEach(function (a) {
+      var positionMarker = new google.maps.Marker({
+        position: { lat: a.currentLat , lng: a.currentLong},
+        map: map,
+        title:"track",
+        icon:'trackDot.png',
+        setTilt: 45
+      });
+      markerArray.push(positionMarker);
+      console.log("position marker " + positionMarker);
+    });
+  }
+
+  function removePositionMarkers () {
+    console.log(false);
+    for (var i = 0; i < markerArray.length; i++) {
+      markerArray[i].setMap(null);
+    }
+    markerArray = [];
+  }
 
   function getWeatherData(latLong) {
     $.getJSON("http://api.openweathermap.org/data/2.5/weather?lat=" + latLong.currentLat + "&lon=-" + latLong.currentLong, function(data) {
@@ -118,13 +161,11 @@ $(document).ready(function() {
     // TODO: should wrap this in an if to see if a change is needed
     localStorage.setItem("mapStyle", getMapStyleUI());
     localStorage.setItem("userZoom", getUserZoomUI());
-    localStorage.setItem("myTrackingArray", JSON.stringify(trackingArray));
+    localStorage.setItem("trackingArray", JSON.stringify(trackingArray));
   }
 
   function getTrackingArray () {
-
     var myArray =  JSON.parse(localStorage.getItem("trackingArray"));
-
     if (myArray === null) {
       console.log("array does not exist");
       localStorage.setItem("mapStyle", "hybrid");
