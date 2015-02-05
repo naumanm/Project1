@@ -82,30 +82,23 @@ $(document).ready(function() {
     } 
   }
 
-// // ---- helper functions ----
+// ---- helper functions ----
 
   function getWeatherData(latLong) {
-
-    console.log(latLong.currentLat);
-    console.log(latLong.currentLong);
-
     $.getJSON("http://api.openweathermap.org/data/2.5/weather?lat=" + latLong.currentLat + "&lon=-" + latLong.currentLong, function(data) {
-
-      console.log(data);
-
       $(".city").text(data.name);
-        $(".temp").text(data.main.temp);
-
-
+      $(".temp").text(data.main.temp + " kelvin");
+      $(".pressure").text(data.main.pressure + " mB");
+      $(".humidity").text(data.main.humidity + "%");
     });
   }
 
   // push latLong to array, shift if getting big
   function updateTrackingArray(trackingArray, latLong) {
-    if (trackingArray.length > 1000) {
-      trackingArray.shift();
-      trackingArray.push(latLong);
-    }
+    // if (trackingArray.length > 1000) {
+    //   trackingArray.shift();
+       trackingArray.push(latLong);
+    // }
     return trackingArray;
   }
 

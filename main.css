@@ -44,8 +44,11 @@ p {
 
 /* CLASSES */
 
-  
-.latText, .longText {
+.latText {
+  display: inline-block;
+}
+
+.longText {
   display: inline-block;
 }
 
@@ -111,8 +114,7 @@ p {
   margin: 7px;
 }
 
-.city, .temp {
-  display: inline-block;
+.city, .temp, .pressure, .humidity {
   z-index: 100;
 }
 
