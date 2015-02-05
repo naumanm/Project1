@@ -41,6 +41,7 @@ $(document).ready(function() {
       trackingArray.push(latLong);
       updateMap(myMap, trackingArray, latLong);
       updateContent(latLong);
+      // need to do an unshift and a pop on the array at .length=1000
       updateLocalStorage(trackingArray);
     });
   }
