@@ -7,7 +7,6 @@ $(document).ready(function() {
   var trackingArray;
 
   var Map = function mapObject () {
-
     var mapOptions = {
       center: new google.maps.LatLng(37.79, -122.40),
       zoom: getStoredZoom(),
@@ -16,16 +15,17 @@ $(document).ready(function() {
     };
     this.map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
   };
-// test 
+
 // ---- main ----
 
   // initialize and start loop 
   function initialize() {
     trackingArray = getTrackingArray();
     myMap = new Map();
-    attachEventListeners();
+    //attachEventListeners();
     updateStyleUI();
     updateZoomUI();
+
     setInterval(function () {issPositionLoop(myMap, trackingArray);}, 5000); 
   }
 
@@ -51,20 +51,15 @@ $(document).ready(function() {
   // update the map
   function updateMap (myMap, trackingArray, latLong) {
 
-    console.log("my map " + myMap);
-    console.log("my trackingArray " + trackingArray);
-    console.log("my latLong " + latLong);
+    var map = myMap.map;
+    //update the map
+    map.setCenter(new google.maps.LatLng(latLong.currentLat, latLong.currentLong));
+    map.setMapTypeId(getMapStyleUI());
+    map.setZoom(getUserZoomUI());
 
+    // need to delete previous markers
 
-    // this is creating a new map object, should update the existing one
-    map = new google.maps.Map(document.getElementById('map-canvas'), {
-      center: { lat: latLong.currentLat , lng: latLong.currentLong},
-      mapTypeId: getMapStyleUI(),
-      disableDefaultUI: true,
-      zoom: getUserZoomUI()
-    });
-
-    // put iss icon on center of map
+    // this puts another iss icon on center of map
     var marker = new google.maps.Marker({
       position: { lat: latLong.currentLat , lng: latLong.currentLong},
       map: map,
@@ -98,12 +93,17 @@ $(document).ready(function() {
     });
   }
 
-  // push latLong to array, shift if getting big
+  // push latLong to array, shift if getting too big
   function updateTrackingArray(trackingArray, latLong) {
-    // if (trackingArray.length > 1000) {
-    //   trackingArray.shift();
-       trackingArray.push(latLong);
-    // }
+       
+    if (trackingArray !== null) {
+      if (trackingArray.length > 1000) {
+        trackingArray.shift();
+      } 
+    }
+    
+    trackingArray.push(latLong);
+    localStorage.setItem("myTrackingArray", JSON.stringify(trackingArray));
     return trackingArray;
   }
 
@@ -125,17 +125,20 @@ $(document).ready(function() {
 
   function getTrackingArray () {
 
-    var myArray =  JSON.parse(localStorage.getItem("myTrackingArray"));    
+    var myArray =  JSON.parse(localStorage.getItem("trackingArray"));
 
-    // if (myArray.length === null) {
-    //   return []; 
-    // } else {
-       return myArray;
-    // }
+    if (myArray === null) {
+      console.log("array does not exist");
+      localStorage.setItem("mapStyle", "hybrid");
+      localStorage.setItem("userZoom", 9);
+      localStorage.setItem("trackingArray", JSON.stringify([]));    
+      return JSON.parse(localStorage.getItem("trackingArray"));
+    }
+    return myArray;
   }
 
   function attachEventListeners() {
-    google.maps.event.addDomListener(window, 'load', initialize);
+    //google.maps.event.addDomListener(window, 'load', initialize);
   }
 
   // updates UI for current map values
@@ -149,7 +152,7 @@ $(document).ready(function() {
 
   // returns style from storage
   function getStoredStyle () {
-    if(localStorage.getItem("mapStyle").length > 0) {
+    if(localStorage.length > 0) {
       return localStorage.getItem("mapStyle");
     } else {
       return "roadmap";
@@ -166,8 +169,6 @@ $(document).ready(function() {
       $("#rad3").prop('checked', true);
     } else if (localStorage.getItem("mapStyle") === "roadmap") {
       $("#rad4").prop('checked', true);
-    } else if (localStorage.getItem("mapStyle") === "undefined") {
-      console.log("mapStyle is undefined");
     }
   }
 
