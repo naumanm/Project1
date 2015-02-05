@@ -29,8 +29,6 @@ $(document).ready(function() {
   };
 
 
-
-
 // ---- main ----
 
   // initialize and start loop 
@@ -40,7 +38,7 @@ $(document).ready(function() {
     myMarker = new Marker();
     updateStyleUI();
     updateZoomUI();
-    setInterval(function () {issPositionLoop(myMap, myMarker, trackingArray);}, 5000); 
+    setInterval(function () {issPositionLoop(myMap, myMarker, trackingArray);}, 1000); 
   }
 
   // execute on each setInterval
@@ -91,38 +89,32 @@ $(document).ready(function() {
     //   setTilt: 45
     // });
 
-    // place tracking markers
-    if ($('#positionTracker').is(':checked')) {
-      drawPositionMarkers(myMap, trackingArray);
-    } else {
-      removePositionMarkers(myMap, trackingArray);
-    }
+    trackingMarkers(myMap, trackingArray);
+
   }
 
 // ---- helper functions ----
 
-  function drawPositionMarkers (myMap, trackingArray) {
-    var map = myMap.map;
+  function trackingMarkers(myMap, trackingArray) {
+    if ($('#positionTracker').is(':checked')) {
 
-    trackingArray.forEach(function (a) {
-      var positionMarker = new google.maps.Marker({
-        position: { lat: a.currentLat , lng: a.currentLong},
-        map: map,
-        title:"track",
-        icon:'trackDot.png',
-        setTilt: 45
-      });
+      var map = myMap.map;
+      trackingArray.forEach(function (a) {
+        var positionMarker = new google.maps.Marker({
+          position: { lat: a.currentLat , lng: a.currentLong},
+          map: map,
+          title:"track",
+          icon:'trackDot.png',
+          setTilt: 45
+        });
       markerArray.push(positionMarker);
-      console.log("position marker " + positionMarker);
-    });
-  }
-
-  function removePositionMarkers () {
-    console.log(false);
-    for (var i = 0; i < markerArray.length; i++) {
-      markerArray[i].setMap(null);
+      });
+    } else {
+      for (var i = 0; i < markerArray.length; i++) {
+        markerArray[i].setMap(null);
     }
     markerArray = [];
+    }
   }
 
   function getWeatherData(latLong) {
@@ -138,7 +130,7 @@ $(document).ready(function() {
   function updateTrackingArray(trackingArray, latLong) {
        
     if (trackingArray !== null) {
-      if (trackingArray.length > 1000) {
+      if (trackingArray.length > 5000) {
         trackingArray.shift();
       } 
     }
