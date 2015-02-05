@@ -27,21 +27,6 @@ $(document).ready(function() {
     setInterval(function () {issPositionLoop(myMap, trackingArray);}, 5000); 
   }
 
-
-function getWeatherData() {
-
-  $.getJSON("http://api.openweathermap.org/data/2.5/weather?lat=37.78&lon=-122.41", function(data) {
-    console.log(data);
-    console.log(data.coord);
-
- //   { lat: latLong.currentLat , lng: latLong.currentLong}
-
-
-  });
-}
- 
-
-
   // execute on each setInterval
   function issPositionLoop (myMap, trackingArray) {
     // get ISS data and set callback
@@ -57,14 +42,13 @@ function getWeatherData() {
       updateMap(myMap, trackingArray, latLong);
       updateContent(latLong);
       updateLocalStorage(trackingArray);
-
-      getWeatherData(latLong);
-
     });
   }
   
   // update the map
   function updateMap (myMap, trackingArray, latLong) {
+    // return weather object for current latlong
+    currentWeather = getWeatherData(latLong);
 
     // this is creating a new map object, should update the existing one
     map = new google.maps.Map(document.getElementById('map-canvas'), {
@@ -99,6 +83,19 @@ function getWeatherData() {
 
 // ---- helper functions ----
 
+  function getWeatherData(latLong) {
+
+    console.log(latLong.currentLat);
+    console.log(latLong.currentLong);
+
+    $.getJSON("http://api.openweathermap.org/data/2.5/weather?lat=" + latLong.currentLat + "&lon=-" + latLong.currentLong, function(data) {
+      console.log(data);
+
+    });
+  }
+
+
+
   // return icon value for display
   function displayISSIcon () {
     if ($('#iconSwitch').is(':checked')) {
@@ -117,7 +114,17 @@ function getWeatherData() {
 
   function getTrackingArray () {
     console.log(JSON.parse(localStorage.getItem("myTrackingArray"))); 
-    return JSON.parse(localStorage.getItem("myTrackingArray"));
+    var myArray = JSON.parse(localStorage.getItem("myTrackingArray"));
+
+    console.log(myArray.length);
+
+    if (myArray.length > 1000) {
+      localStorage.clear();
+      return [];
+    } else {
+      return JSON.parse(localStorage.getItem("myTrackingArray"));
+    }
+
   }
 
   function attachEventListeners() {
@@ -191,7 +198,7 @@ function getWeatherData() {
 
 // ----------------------------------
 
-// letsDoThis...
+// letsDoThis.mikeNauman();
 
 initialize();
 

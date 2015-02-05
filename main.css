@@ -90,7 +90,7 @@ p {
 
 .content1, .content2{
   display: inline-block;
-  background-color: #E0EBEB;
+  background-color: white;
   height: 135px;
   width: 270px;
   z-index: 50;
