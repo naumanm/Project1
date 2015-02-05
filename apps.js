@@ -28,7 +28,6 @@ $(document).ready(function() {
     this.marker = new google.maps.Marker(markerOptions);
   };
 
-
 // ---- main ----
 
   // initialize and start loop 
@@ -46,7 +45,6 @@ $(document).ready(function() {
     // get ISS data and set callback
     $.getJSON('http://api.open-notify.org/iss-now.json?callback=?', function(data) {
       // create a hash for lat long
-      // TODO: this hash contains more than one lat & long
       var latLong = {
         currentLat: data.iss_position.latitude,
         currentLong: data.iss_position.longitude
@@ -54,31 +52,22 @@ $(document).ready(function() {
       // update map trackingArray and UI
       updateTrackingArray(trackingArray, latLong);
       getWeatherData(latLong);
-      updateMap(myMap, myMarker, trackingArray, latLong);
+      updateMapDisplay(myMap, trackingArray, latLong);
       updateContent(latLong);
       updateLocalStorage(trackingArray);
     });
   }
   
   // update the map
-  function updateMap (myMap, myMarker, trackingArray, latLong) {
+  function updateMapDisplay (myMap, trackingArray, latLong) {
+    updateMap(myMap, latLong);
+    ISSIconDisplay();
+    trackingMarkers(myMap, trackingArray);
+  }
 
-    var map = myMap.map;
-    //update the map
-    map.setCenter(new google.maps.LatLng(latLong.currentLat, latLong.currentLong));
-    map.setMapTypeId(getMapStyleUI());
-    map.setZoom(getUserZoomUI());
+// ---- helper functions ----
 
-    // need to delete previous markers
-
-    console.log(myMarker);
-    console.log(latLong);
-    console.log(latLong.currentLat);
-    console.log(latLong.currentLong);
-
-//    myMarker.setPosition( LatLng( latLong.currentLat, latLong.currentLong ) );
-
-    //( new google.maps.LatLng( latLong.currentLat, latLong.currentLong ) );
+  function ISSIconDisplay () {
 
     // this puts another iss icon on center of map
     // var issMarker = new google.maps.Marker({
@@ -88,12 +77,15 @@ $(document).ready(function() {
     //   icon: displayISSIcon(),
     //   setTilt: 45
     // });
-
-    trackingMarkers(myMap, trackingArray);
-
+  
   }
 
-// ---- helper functions ----
+
+  function updateMap(myMap, latLong) {
+    myMap.map.setCenter(new google.maps.LatLng(latLong.currentLat, latLong.currentLong));
+    myMap.map.setMapTypeId(getMapStyleUI());
+    myMap.map.setZoom(getUserZoomUI());
+  }
 
   function trackingMarkers(myMap, trackingArray) {
     if ($('#positionTracker').is(':checked')) {
