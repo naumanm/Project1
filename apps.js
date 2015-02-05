@@ -16,7 +16,7 @@ $(document).ready(function() {
     };
     this.map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
   };
-
+// test 
 // ---- main ----
 
   // initialize and start loop 
