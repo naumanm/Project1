@@ -44,11 +44,8 @@ p {
 
 /* CLASSES */
 
-.latText {
-  display: inline-block;
-}
-
-.longText {
+  
+.latText, .longText {
   display: inline-block;
 }
 
@@ -112,6 +109,11 @@ p {
   display: inline-block;
   text-align: center;
   margin: 7px;
+}
+
+.city, .temp {
+  display: inline-block;
+  z-index: 100;
 }
 
 .footer {

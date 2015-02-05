@@ -1,8 +1,10 @@
 // mikeNauman
 
 $(document).ready(function() {
-  
+
 // ---- constructors ----
+
+  var trackingArray;
 
   var Map = function mapObject () {
 
@@ -19,8 +21,8 @@ $(document).ready(function() {
 
   // initialize and start loop 
   function initialize() {
-    var trackingArray = getTrackingArray();
-    var myMap = new Map();
+    trackingArray = getTrackingArray();
+    myMap = new Map();
     attachEventListeners();
     updateStyleUI();
     updateZoomUI();
@@ -38,18 +40,16 @@ $(document).ready(function() {
         currentLong: data.iss_position.longitude
       };
       // update map trackingArray and UI
-      trackingArray.push(latLong);
+      updateTrackingArray(trackingArray, latLong);
+      getWeatherData(latLong);
       updateMap(myMap, trackingArray, latLong);
       updateContent(latLong);
-      // need to do an unshift and a pop on the array at .length=1000
       updateLocalStorage(trackingArray);
     });
   }
   
   // update the map
   function updateMap (myMap, trackingArray, latLong) {
-    // return weather object for current latlong
-    currentWeather = getWeatherData(latLong);
 
     // this is creating a new map object, should update the existing one
     map = new google.maps.Map(document.getElementById('map-canvas'), {
@@ -82,7 +82,7 @@ $(document).ready(function() {
     } 
   }
 
-// ---- helper functions ----
+// // ---- helper functions ----
 
   function getWeatherData(latLong) {
 
@@ -90,12 +90,24 @@ $(document).ready(function() {
     console.log(latLong.currentLong);
 
     $.getJSON("http://api.openweathermap.org/data/2.5/weather?lat=" + latLong.currentLat + "&lon=-" + latLong.currentLong, function(data) {
+
       console.log(data);
+
+      $(".city").text(data.name);
+        $(".temp").text(data.main.temp);
+
 
     });
   }
 
-
+  // push latLong to array, shift if getting big
+  function updateTrackingArray(trackingArray, latLong) {
+    if (trackingArray.length > 1000) {
+      trackingArray.shift();
+      trackingArray.push(latLong);
+    }
+    return trackingArray;
+  }
 
   // return icon value for display
   function displayISSIcon () {
@@ -114,18 +126,7 @@ $(document).ready(function() {
   }
 
   function getTrackingArray () {
-    console.log(JSON.parse(localStorage.getItem("myTrackingArray"))); 
-    var myArray = JSON.parse(localStorage.getItem("myTrackingArray"));
-
-    console.log(myArray.length);
-
-    if (myArray.length > 1000) {
-      localStorage.clear();
-      return [];
-    } else {
-      return JSON.parse(localStorage.getItem("myTrackingArray"));
-    }
-
+    return JSON.parse(localStorage.getItem("myTrackingArray"));    
   }
 
   function attachEventListeners() {
@@ -199,7 +200,7 @@ $(document).ready(function() {
 
 // ----------------------------------
 
-// letsDoThis.mikeNauman();
+// letsDoThis...
 
 initialize();
 

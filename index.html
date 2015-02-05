@@ -8,10 +8,7 @@
   <link href='http://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
   <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCvhke3lVCb579XC5ALVqbQoslj_Eif4iI"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
- 
-<!--  Link to Aeris.js library  (google maps version)
-<script type="text/javascript"  src="cdn.aerisjs.com/aeris-gmaps.min.js"></script>
--->
+
 
   <script src="apps.js"></script>
 </head>
@@ -90,17 +87,20 @@
               <td><label for="iconSwitch">ISS Icon On/Off</label></td>
             </tr>
           </table>
+        <div>
+          <input id="iconSwitch" type="checkbox" name="iconOnOff" checked="checked">
+          <label for="iconSwitch">ISS Icon On/Off</label>
         </div>
 
-        <!-- this needs local storage and some control for buttons to stop the loop
-        <h2>Enter City or Location: </h2>
-        <form action="javascript: void(0)">
-          <label for="gitAPI"></label>
-          <input type="text" id="getCity" placeholder="enter location or city...">
-          <input type="submit" value="Submit!">
-        </form>
-        -->
 
+        </div>
+        <div class="weather">
+          <div>City: </div>
+          <div class="city">City</div>
+          <div class="temp">Temp</div>
+          <div class="pressure">Pressure</div>
+          <div class="humidity">Humidity</div>
+        </div>
       </div>
     </div>  
   </div>
