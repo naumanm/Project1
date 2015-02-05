@@ -19,7 +19,6 @@ $(document).ready(function() {
 
   // initialize and start loop 
   function initialize() {
-    //getTrackingArray();
     var trackingArray = getTrackingArray();
     var myMap = new Map();
     attachEventListeners();
@@ -27,6 +26,21 @@ $(document).ready(function() {
     updateZoomUI();
     setInterval(function () {issPositionLoop(myMap, trackingArray);}, 5000); 
   }
+
+
+function getWeatherData() {
+
+  $.getJSON("http://api.openweathermap.org/data/2.5/weather?lat=37.78&lon=-122.41", function(data) {
+    console.log(data);
+    console.log(data.coord);
+
+ //   { lat: latLong.currentLat , lng: latLong.currentLong}
+
+
+  });
+}
+ 
+
 
   // execute on each setInterval
   function issPositionLoop (myMap, trackingArray) {
@@ -43,6 +57,9 @@ $(document).ready(function() {
       updateMap(myMap, trackingArray, latLong);
       updateContent(latLong);
       updateLocalStorage(trackingArray);
+
+      getWeatherData(latLong);
+
     });
   }
   
@@ -96,8 +113,6 @@ $(document).ready(function() {
     localStorage.setItem("mapStyle", getMapStyleUI());
     localStorage.setItem("userZoom", getUserZoomUI());
     localStorage.setItem("myTrackingArray", JSON.stringify(trackingArray));
- 
-    console.log(trackingArray);
   }
 
   function getTrackingArray () {
