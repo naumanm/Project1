@@ -121,7 +121,7 @@ $(document).ready(function() {
       $(".city").text(data.name);
       $(".temp").text(data.main.temp + " kelvin");
       $(".pressure").text(data.main.pressure + " mB");
-      $(".humidity").text(data.main.humidity + "%");
+      $(".humidity").text(data.main.humidity + "% Humidity");
     });
   }
 
@@ -170,7 +170,7 @@ $(document).ready(function() {
     $(".latText").text(latLong.currentLat.toFixed(4));
     $(".longText").text(latLong.currentLong.toFixed(4));
     $(".altitudeText").text("431 km");
-    $(".velocityText").text("27,600 kph");
+    $(".velocityText").text("27,617 kph");
     $(".zoomValue").text(getUserZoomUI());
   }
 
