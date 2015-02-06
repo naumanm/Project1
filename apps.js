@@ -5,6 +5,7 @@ $(document).ready(function() {
 // ---- constructors ----
 
   var trackingArray;
+  var issArray = [];
   var markerArray = [];
 
   var Map = function mapObject () {
@@ -34,10 +35,10 @@ $(document).ready(function() {
   function initialize() {
     trackingArray = getTrackingArray();
     myMap = new Map();
-    myMarker = new Marker();
+    myIssMarker = new Marker();
     updateStyleUI();
     updateZoomUI();
-    setInterval(function () {issPositionLoop(myMap, myMarker, trackingArray);}, 1000); 
+    setInterval(function () {issPositionLoop(myMap, myIssMarker, trackingArray);}, 1000); 
   }
 
   // execute on each setInterval
@@ -52,44 +53,44 @@ $(document).ready(function() {
       // update map trackingArray and UI
       updateTrackingArray(trackingArray, latLong);
       getWeatherData(latLong);
-      updateMapDisplay(myMap, trackingArray, latLong);
+      updateMapDisplay(myMap, trackingArray, latLong, myIssMarker);
       updateContent(latLong);
       updateLocalStorage(trackingArray);
     });
   }
   
   // update the map
-  function updateMapDisplay (myMap, trackingArray, latLong) {
+  function updateMapDisplay (myMap, trackingArray, latLong, myIssMarker) {
     updateMap(myMap, latLong);
-    ISSIconDisplay();
+    iconDisplayISS(myMap, myIssMarker, latLong);
     trackingMarkers(myMap, trackingArray);
   }
 
 // ---- helper functions ----
 
-  function ISSIconDisplay () {
+  function iconDisplayISS (myMap, myIssMarker, latLong) {
+    console.log(myIssMarker);
+    var map = myMap.map;
 
-    // this puts another iss icon on center of map
-    // var issMarker = new google.maps.Marker({
-    //   position: { lat: latLong.currentLat , lng: latLong.currentLong},
-    //   map: map,
-    //   title:"ISS",
-    //   icon: displayISSIcon(),
-    //   setTilt: 45
-    // });
-  
-  }
+    issArray.forEach(function (a) {
+      a.setMap(null);
+    });
+    issArray = [];
 
-
-  function updateMap(myMap, latLong) {
-    myMap.map.setCenter(new google.maps.LatLng(latLong.currentLat, latLong.currentLong));
-    myMap.map.setMapTypeId(getMapStyleUI());
-    myMap.map.setZoom(getUserZoomUI());
+    if ($('#iconSwitch').is(':checked')) {
+      var issMarker = new google.maps.Marker({
+        position: { lat: latLong.currentLat , lng: latLong.currentLong},
+        map: map,
+        title:"ISS",
+        icon: displayISSIcon(),
+        setTilt: 45
+      });
+      issArray.push(issMarker);
+    }
   }
 
   function trackingMarkers(myMap, trackingArray) {
     if ($('#positionTracker').is(':checked')) {
-
       var map = myMap.map;
       trackingArray.forEach(function (a) {
         var positionMarker = new google.maps.Marker({
@@ -102,11 +103,17 @@ $(document).ready(function() {
       markerArray.push(positionMarker);
       });
     } else {
-      for (var i = 0; i < markerArray.length; i++) {
-        markerArray[i].setMap(null);
+      markerArray.forEach(function (a) {
+        a.setMap(null);
+      });
+      markerArray = [];
     }
-    markerArray = [];
-    }
+  }
+
+  function updateMap(myMap, latLong) {
+    myMap.map.setCenter(new google.maps.LatLng(latLong.currentLat, latLong.currentLong));
+    myMap.map.setMapTypeId(getMapStyleUI());
+    myMap.map.setZoom(getUserZoomUI());
   }
 
   function getWeatherData(latLong) {
@@ -119,14 +126,12 @@ $(document).ready(function() {
   }
 
   // push latLong to array, shift if getting too big
-  function updateTrackingArray(trackingArray, latLong) {
-       
+  function updateTrackingArray(trackingArray, latLong) {    
     if (trackingArray !== null) {
       if (trackingArray.length > 5000) {
         trackingArray.shift();
       } 
     }
-    
     trackingArray.push(latLong);
     localStorage.setItem("myTrackingArray", JSON.stringify(trackingArray));
     return trackingArray;
